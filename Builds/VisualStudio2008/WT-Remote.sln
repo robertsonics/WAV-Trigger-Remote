@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{310C37C4-E5BE-C936-F6CE-0457E0D8AF1D}") = "WT-Remote", "WT-Remote.vcproj", "{DE45EB49-4787-51B4-1A66-9F94E58BE282}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE45EB49-4787-51B4-1A66-9F94E58BE282}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DE45EB49-4787-51B4-1A66-9F94E58BE282}.Debug|Win32.Build.0 = Debug|Win32
+		{DE45EB49-4787-51B4-1A66-9F94E58BE282}.Release|Win32.ActiveCfg = Release|Win32
+		{DE45EB49-4787-51B4-1A66-9F94E58BE282}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,8 @@
+# Ignored files
+*.bak
+*.ncb
+*.suo
+*.aps
+*.user
+[Dd]ebug
+[Rr]elease
