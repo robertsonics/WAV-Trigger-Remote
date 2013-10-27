@@ -32,6 +32,9 @@
 //==============================================================================
 MainComponent::MainComponent ()
 {
+    addAndMakeVisible (groupComponent3 = new GroupComponent ("new group",
+                                                             "Track Control"));
+
     addAndMakeVisible (groupComponent = new GroupComponent ("new group",
                                                             "Communications"));
 
@@ -116,9 +119,9 @@ MainComponent::MainComponent ()
     stopButton1->setButtonText ("Stop");
     stopButton1->addListener (this);
 
-    addAndMakeVisible (loopToggle = new ToggleButton (String::empty));
-    loopToggle->setButtonText ("Loop");
-    loopToggle->addListener (this);
+    addAndMakeVisible (loopToggle1 = new ToggleButton (String::empty));
+    loopToggle1->setButtonText ("Loop");
+    loopToggle1->addListener (this);
 
     addAndMakeVisible (pauseButton1 = new TextButton (String::empty));
     pauseButton1->setButtonText ("Pause");
@@ -140,9 +143,9 @@ MainComponent::MainComponent ()
     addAndMakeVisible (versionText = new TextEditor (String::empty));
     versionText->setMultiLine (false);
     versionText->setReturnKeyStartsNewLine (false);
-    versionText->setReadOnly (false);
-    versionText->setScrollbarsShown (true);
-    versionText->setCaretVisible (true);
+    versionText->setReadOnly (true);
+    versionText->setScrollbarsShown (false);
+    versionText->setCaretVisible (false);
     versionText->setPopupMenuEnabled (true);
     versionText->setText (String::empty);
 
@@ -153,23 +156,20 @@ MainComponent::MainComponent ()
     addAndMakeVisible (numVoicesText = new TextEditor (String::empty));
     numVoicesText->setMultiLine (false);
     numVoicesText->setReturnKeyStartsNewLine (false);
-    numVoicesText->setReadOnly (false);
-    numVoicesText->setScrollbarsShown (true);
-    numVoicesText->setCaretVisible (true);
+    numVoicesText->setReadOnly (true);
+    numVoicesText->setScrollbarsShown (false);
+    numVoicesText->setCaretVisible (false);
     numVoicesText->setPopupMenuEnabled (true);
     numVoicesText->setText (String::empty);
 
     addAndMakeVisible (numTracksText = new TextEditor (String::empty));
     numTracksText->setMultiLine (false);
     numTracksText->setReturnKeyStartsNewLine (false);
-    numTracksText->setReadOnly (false);
-    numTracksText->setScrollbarsShown (true);
-    numTracksText->setCaretVisible (true);
+    numTracksText->setReadOnly (true);
+    numTracksText->setScrollbarsShown (false);
+    numTracksText->setCaretVisible (false);
     numTracksText->setPopupMenuEnabled (true);
     numTracksText->setText (String::empty);
-
-    addAndMakeVisible (groupComponent3 = new GroupComponent ("new group",
-                                                             "Track Control"));
 
     addAndMakeVisible (label = new Label ("new label",
                                           "Firmware Version:"));
@@ -195,6 +195,109 @@ MainComponent::MainComponent ()
     label3->setColour (TextEditor::textColourId, Colours::black);
     label3->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
+    addAndMakeVisible (playsoloButton2 = new TextButton (String::empty));
+    playsoloButton2->setButtonText ("Play Solo");
+    playsoloButton2->addListener (this);
+
+    addAndMakeVisible (playmixButton2 = new TextButton (String::empty));
+    playmixButton2->setButtonText ("Play Mix");
+    playmixButton2->addListener (this);
+
+    addAndMakeVisible (stopButton2 = new TextButton (String::empty));
+    stopButton2->setButtonText ("Stop");
+    stopButton2->addListener (this);
+
+    addAndMakeVisible (loopToggle2 = new ToggleButton (String::empty));
+    loopToggle2->setButtonText ("Loop");
+    loopToggle2->addListener (this);
+
+    addAndMakeVisible (pauseButton2 = new TextButton (String::empty));
+    pauseButton2->setButtonText ("Pause");
+    pauseButton2->addListener (this);
+
+    addAndMakeVisible (resumeButton2 = new TextButton (String::empty));
+    resumeButton2->setButtonText ("Resume");
+    resumeButton2->addListener (this);
+
+    addAndMakeVisible (trigText2 = new TextEditor (String::empty));
+    trigText2->setMultiLine (false);
+    trigText2->setReturnKeyStartsNewLine (false);
+    trigText2->setReadOnly (false);
+    trigText2->setScrollbarsShown (true);
+    trigText2->setCaretVisible (true);
+    trigText2->setPopupMenuEnabled (true);
+    trigText2->setText ("2");
+
+    addAndMakeVisible (playsoloButton3 = new TextButton (String::empty));
+    playsoloButton3->setButtonText ("Play Solo");
+    playsoloButton3->addListener (this);
+
+    addAndMakeVisible (playmixButton3 = new TextButton (String::empty));
+    playmixButton3->setButtonText ("Play Mix");
+    playmixButton3->addListener (this);
+
+    addAndMakeVisible (stopButton3 = new TextButton (String::empty));
+    stopButton3->setButtonText ("Stop");
+    stopButton3->addListener (this);
+
+    addAndMakeVisible (loopToggle3 = new ToggleButton (String::empty));
+    loopToggle3->setButtonText ("Loop");
+    loopToggle3->addListener (this);
+
+    addAndMakeVisible (pauseButton3 = new TextButton (String::empty));
+    pauseButton3->setButtonText ("Pause");
+    pauseButton3->addListener (this);
+
+    addAndMakeVisible (resumeButton3 = new TextButton (String::empty));
+    resumeButton3->setButtonText ("Resume");
+    resumeButton3->addListener (this);
+
+    addAndMakeVisible (trigText3 = new TextEditor (String::empty));
+    trigText3->setMultiLine (false);
+    trigText3->setReturnKeyStartsNewLine (false);
+    trigText3->setReadOnly (false);
+    trigText3->setScrollbarsShown (true);
+    trigText3->setCaretVisible (true);
+    trigText3->setPopupMenuEnabled (true);
+    trigText3->setText ("3");
+
+    addAndMakeVisible (playsoloButton4 = new TextButton (String::empty));
+    playsoloButton4->setButtonText ("Play Solo");
+    playsoloButton4->addListener (this);
+
+    addAndMakeVisible (playmixButton4 = new TextButton (String::empty));
+    playmixButton4->setButtonText ("Play Mix");
+    playmixButton4->addListener (this);
+
+    addAndMakeVisible (stopButton4 = new TextButton (String::empty));
+    stopButton4->setButtonText ("Stop");
+    stopButton4->addListener (this);
+
+    addAndMakeVisible (loopToggle4 = new ToggleButton (String::empty));
+    loopToggle4->setButtonText ("Loop");
+    loopToggle4->addListener (this);
+
+    addAndMakeVisible (pauseButton4 = new TextButton (String::empty));
+    pauseButton4->setButtonText ("Pause");
+    pauseButton4->addListener (this);
+
+    addAndMakeVisible (resumeButton4 = new TextButton (String::empty));
+    resumeButton4->setButtonText ("Resume");
+    resumeButton4->addListener (this);
+
+    addAndMakeVisible (trigText4 = new TextEditor (String::empty));
+    trigText4->setMultiLine (false);
+    trigText4->setReturnKeyStartsNewLine (false);
+    trigText4->setReadOnly (false);
+    trigText4->setScrollbarsShown (true);
+    trigText4->setCaretVisible (true);
+    trigText4->setPopupMenuEnabled (true);
+    trigText4->setText ("4");
+
+    addAndMakeVisible (stopAllButton = new TextButton (String::empty));
+    stopAllButton->setButtonText ("Stop All");
+    stopAllButton->addListener (this);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -212,7 +315,13 @@ MainComponent::MainComponent ()
 	baudBox->addItem("57.6 kbps", 6);
 	baudBox->setSelectedId(6);
 
+	// For now, disable baudrate selection
+	baudBox->setEnabled(false);
+
 	trigText1->setInputRestrictions(3, "0123456789");
+	trigText2->setInputRestrictions(3, "0123456789");
+	trigText3->setInputRestrictions(3, "0123456789");
+	trigText4->setInputRestrictions(3, "0123456789");
 
 	pCom = new Communicator();
 	pCom->addChangeListener(this);
@@ -268,6 +377,7 @@ MainComponent::~MainComponent()
 	}
     //[/Destructor_pre]
 
+    groupComponent3 = nullptr;
     groupComponent = nullptr;
     groupComponent2 = nullptr;
     volSlider = nullptr;
@@ -282,7 +392,7 @@ MainComponent::~MainComponent()
     playsoloButton1 = nullptr;
     playmixButton1 = nullptr;
     stopButton1 = nullptr;
-    loopToggle = nullptr;
+    loopToggle1 = nullptr;
     pauseButton1 = nullptr;
     resumeButton1 = nullptr;
     trigText1 = nullptr;
@@ -290,10 +400,31 @@ MainComponent::~MainComponent()
     versionButton = nullptr;
     numVoicesText = nullptr;
     numTracksText = nullptr;
-    groupComponent3 = nullptr;
     label = nullptr;
     label2 = nullptr;
     label3 = nullptr;
+    playsoloButton2 = nullptr;
+    playmixButton2 = nullptr;
+    stopButton2 = nullptr;
+    loopToggle2 = nullptr;
+    pauseButton2 = nullptr;
+    resumeButton2 = nullptr;
+    trigText2 = nullptr;
+    playsoloButton3 = nullptr;
+    playmixButton3 = nullptr;
+    stopButton3 = nullptr;
+    loopToggle3 = nullptr;
+    pauseButton3 = nullptr;
+    resumeButton3 = nullptr;
+    trigText3 = nullptr;
+    playsoloButton4 = nullptr;
+    playmixButton4 = nullptr;
+    stopButton4 = nullptr;
+    loopToggle4 = nullptr;
+    pauseButton4 = nullptr;
+    resumeButton4 = nullptr;
+    trigText4 = nullptr;
+    stopAllButton = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -314,10 +445,11 @@ void MainComponent::paint (Graphics& g)
 
 void MainComponent::resized()
 {
+    groupComponent3->setBounds (24, 208, 752, 272);
     groupComponent->setBounds (416, 24, 360, 160);
     groupComponent2->setBounds (24, 24, 360, 160);
-    volSlider->setBounds (33, 488, 159, 81);
-    portBoxlabel3->setBounds (134, 546, 72, 16);
+    volSlider->setBounds (8, 496, 159, 81);
+    portBoxlabel3->setBounds (120, 552, 72, 16);
     portBoxlabel->setBounds (442, 60, 88, 16);
     quitButton->setBounds (712, 544, 63, 24);
     portBox->setBounds (528, 56, 224, 24);
@@ -325,21 +457,42 @@ void MainComponent::resized()
     helpButton->setBounds (632, 544, 63, 24);
     baudBox->setBounds (647, 96, 104, 24);
     portBoxlabel2->setBounds (569, 101, 81, 16);
-    playsoloButton1->setBounds (265, 248, 72, 24);
-    playmixButton1->setBounds (353, 248, 72, 24);
-    stopButton1->setBounds (617, 248, 72, 24);
-    loopToggle->setBounds (182, 247, 64, 24);
-    pauseButton1->setBounds (441, 248, 72, 24);
-    resumeButton1->setBounds (529, 248, 72, 24);
-    trigText1->setBounds (91, 248, 55, 24);
+    playsoloButton1->setBounds (265, 240, 72, 24);
+    playmixButton1->setBounds (353, 240, 72, 24);
+    stopButton1->setBounds (617, 240, 72, 24);
+    loopToggle1->setBounds (182, 239, 64, 24);
+    pauseButton1->setBounds (441, 240, 72, 24);
+    resumeButton1->setBounds (529, 240, 72, 24);
+    trigText1->setBounds (91, 240, 55, 24);
     versionText->setBounds (184, 56, 176, 24);
     versionButton->setBounds (48, 136, 63, 24);
     numVoicesText->setBounds (320, 96, 41, 24);
     numTracksText->setBounds (320, 136, 41, 24);
-    groupComponent3->setBounds (32, 208, 744, 256);
     label->setBounds (60, 56, 128, 24);
     label2->setBounds (150, 97, 175, 24);
     label3->setBounds (163, 136, 163, 24);
+    playsoloButton2->setBounds (265, 289, 72, 24);
+    playmixButton2->setBounds (353, 289, 72, 24);
+    stopButton2->setBounds (617, 289, 72, 24);
+    loopToggle2->setBounds (182, 288, 64, 24);
+    pauseButton2->setBounds (441, 289, 72, 24);
+    resumeButton2->setBounds (529, 289, 72, 24);
+    trigText2->setBounds (91, 289, 55, 24);
+    playsoloButton3->setBounds (265, 338, 72, 24);
+    playmixButton3->setBounds (353, 338, 72, 24);
+    stopButton3->setBounds (617, 338, 72, 24);
+    loopToggle3->setBounds (182, 337, 64, 24);
+    pauseButton3->setBounds (441, 338, 72, 24);
+    resumeButton3->setBounds (529, 338, 72, 24);
+    trigText3->setBounds (91, 338, 55, 24);
+    playsoloButton4->setBounds (265, 386, 72, 24);
+    playmixButton4->setBounds (353, 386, 72, 24);
+    stopButton4->setBounds (617, 386, 72, 24);
+    loopToggle4->setBounds (182, 385, 64, 24);
+    pauseButton4->setBounds (441, 386, 72, 24);
+    resumeButton4->setBounds (529, 386, 72, 24);
+    trigText4->setBounds (91, 386, 55, 24);
+    stopAllButton->setBounds (616, 432, 72, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -362,6 +515,8 @@ void MainComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 void MainComponent::buttonClicked (Button* buttonThatWasClicked)
 {
     //[UserbuttonClicked_Pre]
+	String sVal;
+	int iVal;
     //[/UserbuttonClicked_Pre]
 
     if (buttonThatWasClicked == quitButton)
@@ -376,41 +531,60 @@ void MainComponent::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_helpButton] -- add your button handler code here..
 
-		AlertWindow::showMessageBoxAsync(AlertWindow::InfoIcon, "WTP Flasher Help",
-			"Set the WAV Trigger Pro BOOT0 jumper, and then apply power while connected to the selected serial port.");
+		AlertWindow::showMessageBoxAsync(AlertWindow::InfoIcon, "WTP Remote Help",
+			"No help yet!");
 
         //[/UserButtonCode_helpButton]
     }
     else if (buttonThatWasClicked == playsoloButton1)
     {
         //[UserButtonCode_playsoloButton1] -- add your button handler code here..
-		iVal = trigText1->getText();
-		pCom->controlTrack(TRACK_PLAY_SOLO, 1);
+		sVal = trigText1->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_PLAY_SOLO, iVal);
         //[/UserButtonCode_playsoloButton1]
     }
     else if (buttonThatWasClicked == playmixButton1)
     {
         //[UserButtonCode_playmixButton1] -- add your button handler code here..
+ 		sVal = trigText1->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_PLAY_POLY, iVal);
         //[/UserButtonCode_playmixButton1]
     }
     else if (buttonThatWasClicked == stopButton1)
     {
         //[UserButtonCode_stopButton1] -- add your button handler code here..
+ 		sVal = trigText1->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_STOP, iVal);
         //[/UserButtonCode_stopButton1]
     }
-    else if (buttonThatWasClicked == loopToggle)
+    else if (buttonThatWasClicked == loopToggle1)
     {
-        //[UserButtonCode_loopToggle] -- add your button handler code here..
-        //[/UserButtonCode_loopToggle]
+        //[UserButtonCode_loopToggle1] -- add your button handler code here..
+		sVal = trigText1->getText();
+		iVal = sVal.getIntValue();
+		if (loopToggle1->getToggleState())
+			pCom->controlTrack(TRACK_CONTROL_LOOP_ON, iVal);
+		else
+			pCom->controlTrack(TRACK_CONTROL_LOOP_OFF, iVal);
+        //[/UserButtonCode_loopToggle1]
     }
     else if (buttonThatWasClicked == pauseButton1)
     {
         //[UserButtonCode_pauseButton1] -- add your button handler code here..
+ 		sVal = trigText1->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_PAUSE, iVal);
         //[/UserButtonCode_pauseButton1]
     }
     else if (buttonThatWasClicked == resumeButton1)
     {
         //[UserButtonCode_resumeButton1] -- add your button handler code here..
+  		sVal = trigText1->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_RESUME, iVal);
         //[/UserButtonCode_resumeButton1]
     }
     else if (buttonThatWasClicked == versionButton)
@@ -418,6 +592,165 @@ void MainComponent::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_versionButton] -- add your button handler code here..
 		pCom->getDeviceInfo();
         //[/UserButtonCode_versionButton]
+    }
+    else if (buttonThatWasClicked == playsoloButton2)
+    {
+        //[UserButtonCode_playsoloButton2] -- add your button handler code here..
+		sVal = trigText2->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_PLAY_SOLO, iVal);
+        //[/UserButtonCode_playsoloButton2]
+    }
+    else if (buttonThatWasClicked == playmixButton2)
+    {
+        //[UserButtonCode_playmixButton2] -- add your button handler code here..
+		sVal = trigText2->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_PLAY_POLY, iVal);
+        //[/UserButtonCode_playmixButton2]
+    }
+    else if (buttonThatWasClicked == stopButton2)
+    {
+        //[UserButtonCode_stopButton2] -- add your button handler code here..
+		sVal = trigText2->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_STOP, iVal);
+        //[/UserButtonCode_stopButton2]
+    }
+    else if (buttonThatWasClicked == loopToggle2)
+    {
+        //[UserButtonCode_loopToggle2] -- add your button handler code here..
+		sVal = trigText2->getText();
+		iVal = sVal.getIntValue();
+		if (loopToggle2->getToggleState())
+			pCom->controlTrack(TRACK_CONTROL_LOOP_ON, iVal);
+		else
+			pCom->controlTrack(TRACK_CONTROL_LOOP_OFF, iVal);
+        //[/UserButtonCode_loopToggle2]
+    }
+    else if (buttonThatWasClicked == pauseButton2)
+    {
+        //[UserButtonCode_pauseButton2] -- add your button handler code here..
+ 		sVal = trigText2->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_PAUSE, iVal);
+        //[/UserButtonCode_pauseButton2]
+    }
+    else if (buttonThatWasClicked == resumeButton2)
+    {
+        //[UserButtonCode_resumeButton2] -- add your button handler code here..
+		sVal = trigText2->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_RESUME, iVal);
+        //[/UserButtonCode_resumeButton2]
+    }
+    else if (buttonThatWasClicked == playsoloButton3)
+    {
+        //[UserButtonCode_playsoloButton3] -- add your button handler code here..
+ 		sVal = trigText3->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_PLAY_SOLO, iVal);
+        //[/UserButtonCode_playsoloButton3]
+    }
+    else if (buttonThatWasClicked == playmixButton3)
+    {
+        //[UserButtonCode_playmixButton3] -- add your button handler code here..
+		sVal = trigText3->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_PLAY_POLY, iVal);
+        //[/UserButtonCode_playmixButton3]
+    }
+    else if (buttonThatWasClicked == stopButton3)
+    {
+        //[UserButtonCode_stopButton3] -- add your button handler code here..
+		sVal = trigText3->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_STOP, iVal);
+        //[/UserButtonCode_stopButton3]
+    }
+    else if (buttonThatWasClicked == loopToggle3)
+    {
+        //[UserButtonCode_loopToggle3] -- add your button handler code here..
+		sVal = trigText3->getText();
+		iVal = sVal.getIntValue();
+		if (loopToggle3->getToggleState())
+			pCom->controlTrack(TRACK_CONTROL_LOOP_ON, iVal);
+		else
+			pCom->controlTrack(TRACK_CONTROL_LOOP_OFF, iVal);
+        //[/UserButtonCode_loopToggle3]
+    }
+    else if (buttonThatWasClicked == pauseButton3)
+    {
+        //[UserButtonCode_pauseButton3] -- add your button handler code here..
+		sVal = trigText3->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_PAUSE, iVal);
+        //[/UserButtonCode_pauseButton3]
+    }
+    else if (buttonThatWasClicked == resumeButton3)
+    {
+        //[UserButtonCode_resumeButton3] -- add your button handler code here..
+		sVal = trigText3->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_RESUME, iVal);
+        //[/UserButtonCode_resumeButton3]
+    }
+    else if (buttonThatWasClicked == playsoloButton4)
+    {
+        //[UserButtonCode_playsoloButton4] -- add your button handler code here..
+		sVal = trigText4->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_PLAY_SOLO, iVal);
+        //[/UserButtonCode_playsoloButton4]
+    }
+    else if (buttonThatWasClicked == playmixButton4)
+    {
+        //[UserButtonCode_playmixButton4] -- add your button handler code here..
+		sVal = trigText4->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_PLAY_POLY, iVal);
+        //[/UserButtonCode_playmixButton4]
+    }
+    else if (buttonThatWasClicked == stopButton4)
+    {
+        //[UserButtonCode_stopButton4] -- add your button handler code here..
+		sVal = trigText4->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_STOP, iVal);
+        //[/UserButtonCode_stopButton4]
+    }
+    else if (buttonThatWasClicked == loopToggle4)
+    {
+        //[UserButtonCode_loopToggle4] -- add your button handler code here..
+		sVal = trigText4->getText();
+		iVal = sVal.getIntValue();
+		if (loopToggle4->getToggleState())
+			pCom->controlTrack(TRACK_CONTROL_LOOP_ON, iVal);
+		else
+			pCom->controlTrack(TRACK_CONTROL_LOOP_OFF, iVal);
+        //[/UserButtonCode_loopToggle4]
+    }
+    else if (buttonThatWasClicked == pauseButton4)
+    {
+        //[UserButtonCode_pauseButton4] -- add your button handler code here..
+ 		sVal = trigText4->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_PAUSE, iVal);
+        //[/UserButtonCode_pauseButton4]
+    }
+    else if (buttonThatWasClicked == resumeButton4)
+    {
+        //[UserButtonCode_resumeButton4] -- add your button handler code here..
+		sVal = trigText4->getText();
+		iVal = sVal.getIntValue();
+		pCom->controlTrack(TRACK_CONTROL_RESUME, iVal);
+        //[/UserButtonCode_resumeButton4]
+    }
+    else if (buttonThatWasClicked == stopAllButton)
+    {
+        //[UserButtonCode_stopAllButton] -- add your button handler code here..
+		pCom->stopAll();
+        //[/UserButtonCode_stopAllButton]
     }
 
     //[UserbuttonClicked_Post]
@@ -522,16 +855,18 @@ BEGIN_JUCER_METADATA
                  variableInitialisers="" snapPixels="8" snapActive="1" snapShown="1"
                  overlayOpacity="0.330" fixedSize="1" initialWidth="800" initialHeight="620">
   <BACKGROUND backgroundColour="ff2a4dba"/>
+  <GROUPCOMPONENT name="new group" id="69229fd352cbc9b2" memberName="groupComponent3"
+                  virtualName="" explicitFocusOrder="0" pos="24 208 752 272" title="Track Control"/>
   <GROUPCOMPONENT name="new group" id="2cf21ac44d719d93" memberName="groupComponent"
                   virtualName="" explicitFocusOrder="0" pos="416 24 360 160" title="Communications"/>
   <GROUPCOMPONENT name="new group" id="faf9d7977149782a" memberName="groupComponent2"
                   virtualName="" explicitFocusOrder="0" pos="24 24 360 160" title="WAV Trigger System Info"/>
   <SLIDER name="" id="a4b37bd1b46fdb64" memberName="volSlider" virtualName=""
-          explicitFocusOrder="0" pos="33 488 159 81" min="-80" max="10"
+          explicitFocusOrder="0" pos="8 496 159 81" min="-80" max="10"
           int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="50" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="" id="b3b1c85b4500968f" memberName="portBoxlabel3" virtualName=""
-         explicitFocusOrder="0" pos="134 546 72 16" textCol="ff000000"
+         explicitFocusOrder="0" pos="120 552 72 16" textCol="ff000000"
          edTextCol="ff000000" edBkgCol="0" labelText="Gain (dB)" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="16" bold="0" italic="0" justification="36"/>
@@ -564,40 +899,38 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="16" bold="0" italic="0" justification="36"/>
   <TEXTBUTTON name="" id="dbbab70ff7e44452" memberName="playsoloButton1" virtualName=""
-              explicitFocusOrder="0" pos="265 248 72 24" buttonText="Play Solo"
+              explicitFocusOrder="0" pos="265 240 72 24" buttonText="Play Solo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="51f8f1f4d874a866" memberName="playmixButton1" virtualName=""
-              explicitFocusOrder="0" pos="353 248 72 24" buttonText="Play Mix"
+              explicitFocusOrder="0" pos="353 240 72 24" buttonText="Play Mix"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="c902ffad93176b2c" memberName="stopButton1" virtualName=""
-              explicitFocusOrder="0" pos="617 248 72 24" buttonText="Stop"
+              explicitFocusOrder="0" pos="617 240 72 24" buttonText="Stop"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TOGGLEBUTTON name="" id="403473bc1f1cbd0b" memberName="loopToggle" virtualName=""
-                explicitFocusOrder="0" pos="182 247 64 24" buttonText="Loop"
+  <TOGGLEBUTTON name="" id="403473bc1f1cbd0b" memberName="loopToggle1" virtualName=""
+                explicitFocusOrder="0" pos="182 239 64 24" buttonText="Loop"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TEXTBUTTON name="" id="4300c5f8bc94f310" memberName="pauseButton1" virtualName=""
-              explicitFocusOrder="0" pos="441 248 72 24" buttonText="Pause"
+              explicitFocusOrder="0" pos="441 240 72 24" buttonText="Pause"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="9865d9baf642eb5f" memberName="resumeButton1" virtualName=""
-              explicitFocusOrder="0" pos="529 248 72 24" buttonText="Resume"
+              explicitFocusOrder="0" pos="529 240 72 24" buttonText="Resume"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTEDITOR name="" id="349bf31d6a377790" memberName="trigText1" virtualName=""
-              explicitFocusOrder="0" pos="91 248 55 24" initialText="1" multiline="0"
+              explicitFocusOrder="0" pos="91 240 55 24" initialText="1" multiline="0"
               retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
   <TEXTEDITOR name="" id="d897b478ba180688" memberName="versionText" virtualName=""
               explicitFocusOrder="0" pos="184 56 176 24" initialText="" multiline="0"
-              retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
+              retKeyStartsLine="0" readonly="1" scrollbars="0" caret="0" popupmenu="1"/>
   <TEXTBUTTON name="" id="5ec42bc6370231ba" memberName="versionButton" virtualName=""
               explicitFocusOrder="0" pos="48 136 63 24" buttonText="Get Info"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTEDITOR name="" id="ae4c7ab7b0e1ec37" memberName="numVoicesText" virtualName=""
               explicitFocusOrder="0" pos="320 96 41 24" initialText="" multiline="0"
-              retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
+              retKeyStartsLine="0" readonly="1" scrollbars="0" caret="0" popupmenu="1"/>
   <TEXTEDITOR name="" id="4b638d8174953262" memberName="numTracksText" virtualName=""
               explicitFocusOrder="0" pos="320 136 41 24" initialText="" multiline="0"
-              retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
-  <GROUPCOMPONENT name="new group" id="69229fd352cbc9b2" memberName="groupComponent3"
-                  virtualName="" explicitFocusOrder="0" pos="32 208 744 256" title="Track Control"/>
+              retKeyStartsLine="0" readonly="1" scrollbars="0" caret="0" popupmenu="1"/>
   <LABEL name="new label" id="373041437cee60c6" memberName="label" virtualName=""
          explicitFocusOrder="0" pos="60 56 128 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Firmware Version:" editableSingleClick="0"
@@ -613,6 +946,72 @@ BEGIN_JUCER_METADATA
          edBkgCol="0" labelText="Number of WAV tracks:" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
+  <TEXTBUTTON name="" id="7f0e6681b9cd0f73" memberName="playsoloButton2" virtualName=""
+              explicitFocusOrder="0" pos="265 289 72 24" buttonText="Play Solo"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="" id="5b12b9288609c1c3" memberName="playmixButton2" virtualName=""
+              explicitFocusOrder="0" pos="353 289 72 24" buttonText="Play Mix"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="" id="db164cb87a73ee5" memberName="stopButton2" virtualName=""
+              explicitFocusOrder="0" pos="617 289 72 24" buttonText="Stop"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TOGGLEBUTTON name="" id="6bd56188c0903ee2" memberName="loopToggle2" virtualName=""
+                explicitFocusOrder="0" pos="182 288 64 24" buttonText="Loop"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <TEXTBUTTON name="" id="1642d5e074a6111e" memberName="pauseButton2" virtualName=""
+              explicitFocusOrder="0" pos="441 289 72 24" buttonText="Pause"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="" id="3e4d4c740ddd1bc3" memberName="resumeButton2" virtualName=""
+              explicitFocusOrder="0" pos="529 289 72 24" buttonText="Resume"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTEDITOR name="" id="2b590d01f2235d90" memberName="trigText2" virtualName=""
+              explicitFocusOrder="0" pos="91 289 55 24" initialText="2" multiline="0"
+              retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
+  <TEXTBUTTON name="" id="d73e3cf999c54579" memberName="playsoloButton3" virtualName=""
+              explicitFocusOrder="0" pos="265 338 72 24" buttonText="Play Solo"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="" id="3ee79d9e92738b5f" memberName="playmixButton3" virtualName=""
+              explicitFocusOrder="0" pos="353 338 72 24" buttonText="Play Mix"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="" id="bdd21d937427de45" memberName="stopButton3" virtualName=""
+              explicitFocusOrder="0" pos="617 338 72 24" buttonText="Stop"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TOGGLEBUTTON name="" id="31a413cdebdb1e8b" memberName="loopToggle3" virtualName=""
+                explicitFocusOrder="0" pos="182 337 64 24" buttonText="Loop"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <TEXTBUTTON name="" id="f4dbf44b658c9e30" memberName="pauseButton3" virtualName=""
+              explicitFocusOrder="0" pos="441 338 72 24" buttonText="Pause"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="" id="249ead5e9b5d4a0" memberName="resumeButton3" virtualName=""
+              explicitFocusOrder="0" pos="529 338 72 24" buttonText="Resume"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTEDITOR name="" id="7da7f44767016f2f" memberName="trigText3" virtualName=""
+              explicitFocusOrder="0" pos="91 338 55 24" initialText="3" multiline="0"
+              retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
+  <TEXTBUTTON name="" id="a90629870d2b8c10" memberName="playsoloButton4" virtualName=""
+              explicitFocusOrder="0" pos="265 386 72 24" buttonText="Play Solo"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="" id="2ac5ec9cfa4d4951" memberName="playmixButton4" virtualName=""
+              explicitFocusOrder="0" pos="353 386 72 24" buttonText="Play Mix"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="" id="ed70635b82008bdf" memberName="stopButton4" virtualName=""
+              explicitFocusOrder="0" pos="617 386 72 24" buttonText="Stop"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TOGGLEBUTTON name="" id="62772798a04fa3de" memberName="loopToggle4" virtualName=""
+                explicitFocusOrder="0" pos="182 385 64 24" buttonText="Loop"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <TEXTBUTTON name="" id="697fd215367a3f8b" memberName="pauseButton4" virtualName=""
+              explicitFocusOrder="0" pos="441 386 72 24" buttonText="Pause"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="" id="d1e44c4da5163d80" memberName="resumeButton4" virtualName=""
+              explicitFocusOrder="0" pos="529 386 72 24" buttonText="Resume"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTEDITOR name="" id="fa324c00c2f845ca" memberName="trigText4" virtualName=""
+              explicitFocusOrder="0" pos="91 386 55 24" initialText="4" multiline="0"
+              retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
+  <TEXTBUTTON name="" id="be0f5cd3d7919846" memberName="stopAllButton" virtualName=""
+              explicitFocusOrder="0" pos="616 432 72 24" buttonText="Stop All"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

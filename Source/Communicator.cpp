@@ -159,9 +159,9 @@ void Communicator::closePort(void)
 
 // **************************************************************************
 // getDeviceInfo
-bool Communicator::getDeviceInfo() {
+bool Communicator::getDeviceInfo(void) {
 
-unsigned char xbuf[16];
+unsigned char xbuf[8];
 
 	if (pSP == nullptr)
 		return false;
@@ -174,6 +174,7 @@ unsigned char xbuf[16];
 	xbuf[4] = 0x55;
 	pOutStream->write(xbuf, 5);
 
+	// Wait a bit...
 	sleep(200);
 
 	// Then send the get info command
@@ -185,10 +186,10 @@ unsigned char xbuf[16];
 }
 
 // **************************************************************************
-// controlTrack
-bool Communicator::controlTrack(int mode, int trackNum) {
+// stopAll
+bool Communicator::stopAll(void) {
 
-unsigned char xbuf[16];
+unsigned char xbuf[8];
 
 	if (pSP == nullptr)
 		return false;
@@ -197,13 +198,39 @@ unsigned char xbuf[16];
 	xbuf[0] = 0xF0;
 	xbuf[1] = 0xaa;
 	xbuf[2] = 0x05;
-	xbuf[3] = GET_VERSION;
+	xbuf[3] = STOP_ALL;
 	xbuf[4] = 0x55;
 	pOutStream->write(xbuf, 5);
 
 	return true;
-
 }
+
+
+// **************************************************************************
+// controlTrack
+bool Communicator::controlTrack(int mode, int trackNum) {
+
+unsigned char xbuf[8];
+
+	if (pSP == nullptr)
+		return false;
+
+	if (trackNum > 999)
+		return false;
+
+	// First, 
+	xbuf[0] = 0xF0;
+	xbuf[1] = 0xaa;
+	xbuf[2] = 0x08;
+	xbuf[3] = CONTROL_TRACK;
+	xbuf[4] = (unsigned char)mode;
+	xbuf[5] = (unsigned char)trackNum;
+	xbuf[6] = (unsigned char)(trackNum >> 8);
+	xbuf[7] = 0x55;
+	pOutStream->write(xbuf, 8);
+	return true;
+}
+
 
 // **************************************************************************
 // getMessage

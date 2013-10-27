@@ -69,6 +69,7 @@ private:
     //[/UserVariables]
 
     //==============================================================================
+    ScopedPointer<GroupComponent> groupComponent3;
     ScopedPointer<GroupComponent> groupComponent;
     ScopedPointer<GroupComponent> groupComponent2;
     ScopedPointer<Slider> volSlider;
@@ -83,7 +84,7 @@ private:
     ScopedPointer<TextButton> playsoloButton1;
     ScopedPointer<TextButton> playmixButton1;
     ScopedPointer<TextButton> stopButton1;
-    ScopedPointer<ToggleButton> loopToggle;
+    ScopedPointer<ToggleButton> loopToggle1;
     ScopedPointer<TextButton> pauseButton1;
     ScopedPointer<TextButton> resumeButton1;
     ScopedPointer<TextEditor> trigText1;
@@ -91,10 +92,31 @@ private:
     ScopedPointer<TextButton> versionButton;
     ScopedPointer<TextEditor> numVoicesText;
     ScopedPointer<TextEditor> numTracksText;
-    ScopedPointer<GroupComponent> groupComponent3;
     ScopedPointer<Label> label;
     ScopedPointer<Label> label2;
     ScopedPointer<Label> label3;
+    ScopedPointer<TextButton> playsoloButton2;
+    ScopedPointer<TextButton> playmixButton2;
+    ScopedPointer<TextButton> stopButton2;
+    ScopedPointer<ToggleButton> loopToggle2;
+    ScopedPointer<TextButton> pauseButton2;
+    ScopedPointer<TextButton> resumeButton2;
+    ScopedPointer<TextEditor> trigText2;
+    ScopedPointer<TextButton> playsoloButton3;
+    ScopedPointer<TextButton> playmixButton3;
+    ScopedPointer<TextButton> stopButton3;
+    ScopedPointer<ToggleButton> loopToggle3;
+    ScopedPointer<TextButton> pauseButton3;
+    ScopedPointer<TextButton> resumeButton3;
+    ScopedPointer<TextEditor> trigText3;
+    ScopedPointer<TextButton> playsoloButton4;
+    ScopedPointer<TextButton> playmixButton4;
+    ScopedPointer<TextButton> stopButton4;
+    ScopedPointer<ToggleButton> loopToggle4;
+    ScopedPointer<TextButton> pauseButton4;
+    ScopedPointer<TextButton> resumeButton4;
+    ScopedPointer<TextEditor> trigText4;
+    ScopedPointer<TextButton> stopAllButton;
 
 
     //==============================================================================

@@ -20,14 +20,6 @@
 #define COMM_STOPPED		0
 #define COMM_STARTED		1
 
-enum {
-	TRACK_PLAY_SOLO,
-	TRACK_PLAY_POLY,
-	TRACK_PAUSE,
-	TRACK_RESUME,
-	TRACK_STOP,
-};
-
 class Communicator : public Thread, public ChangeBroadcaster {
 
 public:
@@ -45,6 +37,7 @@ public:
 	void closePort(void);
 	bool getDeviceInfo();
 	bool controlTrack(int mode, int trackNum);
+	bool stopAll(void);
 	int getState()				{ return m_State; }
 	bool isPortOpen()			{ return m_portOpenFlag; }
 	bool isMsgReady()			{ return m_msgReadyFlag; }
