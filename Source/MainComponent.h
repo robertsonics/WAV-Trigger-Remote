@@ -69,17 +69,15 @@ private:
     //[/UserVariables]
 
     //==============================================================================
+    ScopedPointer<GroupComponent> groupComponent;
+    ScopedPointer<GroupComponent> groupComponent2;
     ScopedPointer<Slider> volSlider;
     ScopedPointer<Label> portBoxlabel3;
     ScopedPointer<Label> portBoxlabel;
     ScopedPointer<TextButton> quitButton;
     ScopedPointer<ComboBox> portBox;
-    ScopedPointer<TextEditor> fileName;
-    ScopedPointer<TextButton> browseButton;
     ScopedPointer<Label> statusBar;
-    ScopedPointer<TextButton> connectButton;
     ScopedPointer<TextButton> helpButton;
-    ScopedPointer<HyperlinkButton> hyperlinkButton;
     ScopedPointer<ComboBox> baudBox;
     ScopedPointer<Label> portBoxlabel2;
     ScopedPointer<TextButton> playsoloButton1;
@@ -91,6 +89,12 @@ private:
     ScopedPointer<TextEditor> trigText1;
     ScopedPointer<TextEditor> versionText;
     ScopedPointer<TextButton> versionButton;
+    ScopedPointer<TextEditor> numVoicesText;
+    ScopedPointer<TextEditor> numTracksText;
+    ScopedPointer<GroupComponent> groupComponent3;
+    ScopedPointer<Label> label;
+    ScopedPointer<Label> label2;
+    ScopedPointer<Label> label3;
 
 
     //==============================================================================

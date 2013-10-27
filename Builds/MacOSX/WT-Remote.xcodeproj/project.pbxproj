@@ -435,6 +435,7 @@
 		A964C05FDC10091220CBEA5A = { isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "juce_FileChooser.cpp"; path = "/Juce/modules/juce_gui_basics/filebrowser/juce_FileChooser.cpp"; sourceTree = "<absolute>"; };
 		A98D5C83254F0B005ECC822C = { isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "juce_MemoryOutputStream.h"; path = "/Juce/modules/juce_core/streams/juce_MemoryOutputStream.h"; sourceTree = "<absolute>"; };
 		A9A51F36204C584B50B44AA5 = { isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "juce_mac_NSViewComponent.mm"; path = "/Juce/modules/juce_gui_extra/native/juce_mac_NSViewComponent.mm"; sourceTree = "<absolute>"; };
+		A9A8981D6A4BBE2C8784ABA1 = { isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Commands.h; path = ../../Source/Commands.h; sourceTree = "SOURCE_ROOT"; };
 		A9E32682A6A35898D9F140BE = { isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "juce_FileSearchPathListComponent.h"; path = "/Juce/modules/juce_gui_basics/filebrowser/juce_FileSearchPathListComponent.h"; sourceTree = "<absolute>"; };
 		A9E35E85D16F32AD3EA135BE = { isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AA27FB5F27F6DBD72D782A91 = { isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "juce_SystemTrayIconComponent.cpp"; path = "/Juce/modules/juce_gui_extra/misc/juce_SystemTrayIconComponent.cpp"; sourceTree = "<absolute>"; };
@@ -661,6 +662,7 @@
 		FFC75373C7723E53027F3584 = { isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "juce_NSViewComponent.h"; path = "/Juce/modules/juce_gui_extra/embedding/juce_NSViewComponent.h"; sourceTree = "<absolute>"; };
 		FFDE885698564717F039DE49 = { isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "juce_LookAndFeel.cpp"; path = "/Juce/modules/juce_gui_basics/lookandfeel/juce_LookAndFeel.cpp"; sourceTree = "<absolute>"; };
 		39BDB517F5C4ED09B374411D = { isa = PBXGroup; children = (
+				A9A8981D6A4BBE2C8784ABA1,
 				2501A76A25A47946739D9105,
 				CD3F7E3382C1FFFF20DDE68B,
 				EA25BF25EDB47CD9682E9F99,

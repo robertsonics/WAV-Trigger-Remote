@@ -8,59 +8,50 @@
 //
 // **************************************************************************
 
-#ifndef __DOWN_H_3000605__
-#define __DOWN_H_3000605__
+#ifndef __COMM_H_3000605__
+#define __COMM_H_3000605__
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "../../../../juce/modules/juce_core/time/juce_Time.h"
 #include "Serial.h"
 
-#define DLSTATE_IDLE			0
+#define MAX_MESSAGE_LENGTH	32
 
-#define DLSTATE_CONNECTING		1
-#define DLSTATE_ERASING			2
-#define DLSTATE_PROGRAMMING_0	3
-#define DLSTATE_PROGRAMMING_1	4
-#define DLSTATE_PROGRAMMING_2	5
-#define DLSTATE_PROGRAMMING_3	6
-#define DLSTATE_PROGRAMMING_4	7
-#define DLSTATE_PROGRAMMING_5	8
-#define DLSTATE_PROGRAMMING_6	9
-#define DLSTATE_PROGRAMMING_7	10
-#define DLSTATE_PROGRAMMING_8	11
-#define DLSTATE_PROGRAMMING_9	12
-#define DLSTATE_DONE			13
+#define COMM_STOPPED		0
+#define COMM_STARTED		1
 
-#define DLSTATE_ERROR_CONNECT	20
-#define DLSTATE_ERROR_ERASE		21
-#define DLSTATE_ERROR_PROGRAM	22
+enum {
+	TRACK_PLAY_SOLO,
+	TRACK_PLAY_POLY,
+	TRACK_PAUSE,
+	TRACK_RESUME,
+	TRACK_STOP,
+};
 
 class Communicator : public Thread, public ChangeBroadcaster {
 
 public:
 	Communicator() : Thread ("Communicator Thread") {
-		m_State = DLSTATE_IDLE;
+		m_State = COMM_STOPPED;
 		m_portOpenFlag = false;
-		m_hexFileSelectedFlag = false;
 		pSP = nullptr;
 		pInStream = nullptr;
 		pOutStream = nullptr;
+		m_msgReadyFlag = false;
 	}
 	~Communicator();
 	void run();
 	bool openPort(String portName);
 	void closePort(void);
-	bool getVersion(String *pStrVersion);
-	void setFile(File hexFile);
+	bool getDeviceInfo();
+	bool controlTrack(int mode, int trackNum);
 	int getState()				{ return m_State; }
 	bool isPortOpen()			{ return m_portOpenFlag; }
-	bool isHexFileSelected()	{ return m_hexFileSelectedFlag; }
+	bool isMsgReady()			{ return m_msgReadyFlag; }
+	void clearMsgReady()		{ m_msgReadyFlag = false; }
+	int getMessage(unsigned char * pDest);
 			
 private:
-
-	bool connect(void);
-	bool erase(void);
-	bool program(void);
 
 	bool readBytes (unsigned char *pBuf, int numBytes, int timeOut);
 	void flushReceiver(void);
@@ -71,11 +62,14 @@ private:
 	SerialPortInputStream *pInStream;
 
 	Time *pTime;
-	File hexFile;
 
 	int m_State;
 	bool m_portOpenFlag;
-	bool m_hexFileSelectedFlag;
+
+	bool m_msgReadyFlag;
+	unsigned char m_rxBuff[1024];
+	int m_rxPtr;
+	int m_rxLen;
 
 }; // end class Communicator
 

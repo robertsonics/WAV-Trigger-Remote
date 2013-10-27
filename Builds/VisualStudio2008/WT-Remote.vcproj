@@ -212,6 +212,10 @@
 				Name="Source"
 				>
 				<File
+					RelativePath="..\..\Source\Commands.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Source\Communicator.cpp"
 					>
 				</File>

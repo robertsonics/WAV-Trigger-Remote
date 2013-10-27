@@ -57,6 +57,7 @@
   </EXPORTFORMATS>
   <MAINGROUP id="a0m6ZvX1F" name="WT-Remote">
     <GROUP id="GVpTv8yA5" name="Source">
+      <FILE id="VqRcba" name="Commands.h" compile="0" resource="0" file="Source/Commands.h"/>
       <FILE id="iPYKsc" name="Communicator.cpp" compile="1" resource="0"
             file="Source/Communicator.cpp"/>
       <FILE id="nL91Un" name="Communicator.h" compile="0" resource="0" file="Source/Communicator.h"/>

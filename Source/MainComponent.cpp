@@ -20,6 +20,7 @@
 //[Headers] You can add your own extra header files here...
 #include "Serial.h"
 #include "Communicator.h"
+#include "Commands.h"
 //[/Headers]
 
 #include "MainComponent.h"
@@ -31,6 +32,12 @@
 //==============================================================================
 MainComponent::MainComponent ()
 {
+    addAndMakeVisible (groupComponent = new GroupComponent ("new group",
+                                                            "Communications"));
+
+    addAndMakeVisible (groupComponent2 = new GroupComponent ("new group",
+                                                             "WAV Trigger System Info"));
+
     addAndMakeVisible (volSlider = new Slider (String::empty));
     volSlider->setRange (-80, 10, 1);
     volSlider->setSliderStyle (Slider::RotaryVerticalDrag);
@@ -66,19 +73,6 @@ MainComponent::MainComponent ()
     portBox->setTextWhenNoChoicesAvailable ("(no choices)");
     portBox->addListener (this);
 
-    addAndMakeVisible (fileName = new TextEditor (String::empty));
-    fileName->setMultiLine (false);
-    fileName->setReturnKeyStartsNewLine (false);
-    fileName->setReadOnly (false);
-    fileName->setScrollbarsShown (true);
-    fileName->setCaretVisible (true);
-    fileName->setPopupMenuEnabled (true);
-    fileName->setText (String::empty);
-
-    addAndMakeVisible (browseButton = new TextButton (String::empty));
-    browseButton->setButtonText ("Browse");
-    browseButton->addListener (this);
-
     addAndMakeVisible (statusBar = new Label ("new label",
                                               String::empty));
     statusBar->setFont (Font (15.00f, Font::plain));
@@ -90,20 +84,9 @@ MainComponent::MainComponent ()
     statusBar->setColour (TextEditor::textColourId, Colours::black);
     statusBar->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    addAndMakeVisible (connectButton = new TextButton (String::empty));
-    connectButton->setButtonText ("Program");
-    connectButton->addListener (this);
-    connectButton->setColour (TextButton::buttonColourId, Colour (0xff45c603));
-
     addAndMakeVisible (helpButton = new TextButton (String::empty));
     helpButton->setButtonText ("Help");
     helpButton->addListener (this);
-
-    addAndMakeVisible (hyperlinkButton = new HyperlinkButton ("Check for latest firmware",
-                                                              URL ("http://robertsonics.com/makerjam/support/")));
-    hyperlinkButton->setTooltip ("http://robertsonics.com/makerjam/support/");
-    hyperlinkButton->setButtonText ("Check for latest firmware");
-    hyperlinkButton->setColour (HyperlinkButton::textColourId, Colours::white);
 
     addAndMakeVisible (baudBox = new ComboBox (String::empty));
     baudBox->setEditableText (false);
@@ -164,14 +147,59 @@ MainComponent::MainComponent ()
     versionText->setText (String::empty);
 
     addAndMakeVisible (versionButton = new TextButton (String::empty));
-    versionButton->setButtonText ("Version");
+    versionButton->setButtonText ("Get Info");
     versionButton->addListener (this);
+
+    addAndMakeVisible (numVoicesText = new TextEditor (String::empty));
+    numVoicesText->setMultiLine (false);
+    numVoicesText->setReturnKeyStartsNewLine (false);
+    numVoicesText->setReadOnly (false);
+    numVoicesText->setScrollbarsShown (true);
+    numVoicesText->setCaretVisible (true);
+    numVoicesText->setPopupMenuEnabled (true);
+    numVoicesText->setText (String::empty);
+
+    addAndMakeVisible (numTracksText = new TextEditor (String::empty));
+    numTracksText->setMultiLine (false);
+    numTracksText->setReturnKeyStartsNewLine (false);
+    numTracksText->setReadOnly (false);
+    numTracksText->setScrollbarsShown (true);
+    numTracksText->setCaretVisible (true);
+    numTracksText->setPopupMenuEnabled (true);
+    numTracksText->setText (String::empty);
+
+    addAndMakeVisible (groupComponent3 = new GroupComponent ("new group",
+                                                             "Track Control"));
+
+    addAndMakeVisible (label = new Label ("new label",
+                                          "Firmware Version:"));
+    label->setFont (Font (15.00f, Font::plain));
+    label->setJustificationType (Justification::centredLeft);
+    label->setEditable (false, false, false);
+    label->setColour (TextEditor::textColourId, Colours::black);
+    label->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (label2 = new Label ("new label",
+                                           "Number of Stereo Voices:"));
+    label2->setFont (Font (15.00f, Font::plain));
+    label2->setJustificationType (Justification::centredLeft);
+    label2->setEditable (false, false, false);
+    label2->setColour (TextEditor::textColourId, Colours::black);
+    label2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (label3 = new Label ("new label",
+                                           "Number of WAV tracks:"));
+    label3->setFont (Font (15.00f, Font::plain));
+    label3->setJustificationType (Justification::centredLeft);
+    label3->setEditable (false, false, false);
+    label3->setColour (TextEditor::textColourId, Colours::black);
+    label3->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
 
     //[UserPreSize]
     //[/UserPreSize]
 
-    setSize (680, 480);
+    setSize (800, 620);
 
 
     //[Constructor] You can add your own custom stuff here..
@@ -185,8 +213,6 @@ MainComponent::MainComponent ()
 	baudBox->setSelectedId(6);
 
 	trigText1->setInputRestrictions(3, "0123456789");
-
-	connectButton->setEnabled(false);
 
 	pCom = new Communicator();
 	pCom->addChangeListener(this);
@@ -242,17 +268,15 @@ MainComponent::~MainComponent()
 	}
     //[/Destructor_pre]
 
+    groupComponent = nullptr;
+    groupComponent2 = nullptr;
     volSlider = nullptr;
     portBoxlabel3 = nullptr;
     portBoxlabel = nullptr;
     quitButton = nullptr;
     portBox = nullptr;
-    fileName = nullptr;
-    browseButton = nullptr;
     statusBar = nullptr;
-    connectButton = nullptr;
     helpButton = nullptr;
-    hyperlinkButton = nullptr;
     baudBox = nullptr;
     portBoxlabel2 = nullptr;
     playsoloButton1 = nullptr;
@@ -264,6 +288,12 @@ MainComponent::~MainComponent()
     trigText1 = nullptr;
     versionText = nullptr;
     versionButton = nullptr;
+    numVoicesText = nullptr;
+    numTracksText = nullptr;
+    groupComponent3 = nullptr;
+    label = nullptr;
+    label2 = nullptr;
+    label3 = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -284,28 +314,32 @@ void MainComponent::paint (Graphics& g)
 
 void MainComponent::resized()
 {
-    volSlider->setBounds (481, 272, 159, 81);
-    portBoxlabel3->setBounds (582, 330, 72, 16);
-    portBoxlabel->setBounds (331, 36, 88, 16);
-    quitButton->setBounds (592, 416, 63, 24);
-    portBox->setBounds (417, 32, 224, 24);
-    fileName->setBounds (129, 376, 424, 24);
-    browseButton->setBounds (41, 376, 63, 24);
+    groupComponent->setBounds (416, 24, 360, 160);
+    groupComponent2->setBounds (24, 24, 360, 160);
+    volSlider->setBounds (33, 488, 159, 81);
+    portBoxlabel3->setBounds (134, 546, 72, 16);
+    portBoxlabel->setBounds (442, 60, 88, 16);
+    quitButton->setBounds (712, 544, 63, 24);
+    portBox->setBounds (528, 56, 224, 24);
     statusBar->setBounds (0, getHeight() - 24, proportionOfWidth (1.0000f), 24);
-    connectButton->setBounds (41, 416, 63, 24);
-    helpButton->setBounds (512, 416, 63, 24);
-    hyperlinkButton->setBounds (240, 416, 200, 24);
-    baudBox->setBounds (537, 72, 104, 24);
-    portBoxlabel2->setBounds (457, 76, 81, 16);
-    playsoloButton1->setBounds (217, 168, 72, 24);
-    playmixButton1->setBounds (305, 168, 72, 24);
-    stopButton1->setBounds (569, 168, 72, 24);
-    loopToggle->setBounds (134, 167, 64, 24);
-    pauseButton1->setBounds (393, 168, 72, 24);
-    resumeButton1->setBounds (481, 168, 72, 24);
-    trigText1->setBounds (43, 168, 55, 24);
-    versionText->setBounds (40, 32, 248, 24);
-    versionButton->setBounds (40, 72, 63, 24);
+    helpButton->setBounds (632, 544, 63, 24);
+    baudBox->setBounds (647, 96, 104, 24);
+    portBoxlabel2->setBounds (569, 101, 81, 16);
+    playsoloButton1->setBounds (265, 248, 72, 24);
+    playmixButton1->setBounds (353, 248, 72, 24);
+    stopButton1->setBounds (617, 248, 72, 24);
+    loopToggle->setBounds (182, 247, 64, 24);
+    pauseButton1->setBounds (441, 248, 72, 24);
+    resumeButton1->setBounds (529, 248, 72, 24);
+    trigText1->setBounds (91, 248, 55, 24);
+    versionText->setBounds (184, 56, 176, 24);
+    versionButton->setBounds (48, 136, 63, 24);
+    numVoicesText->setBounds (320, 96, 41, 24);
+    numTracksText->setBounds (320, 136, 41, 24);
+    groupComponent3->setBounds (32, 208, 744, 256);
+    label->setBounds (60, 56, 128, 24);
+    label2->setBounds (150, 97, 175, 24);
+    label3->setBounds (163, 136, 163, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -338,52 +372,6 @@ void MainComponent::buttonClicked (Button* buttonThatWasClicked)
 
         //[/UserButtonCode_quitButton]
     }
-    else if (buttonThatWasClicked == browseButton)
-    {
-        //[UserButtonCode_browseButton] -- add your button handler code here..
-
-		WildcardFileFilter wildcardFilter("*.hex", String::empty, "Hex files");
-		FileBrowserComponent browser((FileBrowserComponent::canSelectFiles | FileBrowserComponent::openMode),
-			File::nonexistent,
-			&wildcardFilter,
-			nullptr);
-		FileChooserDialogBox dlgBox ("Select a firmware hex file",
-			"Please select a firmware hex file",
-			browser,
-			false,
-			Colours::lightgrey);
-		if (dlgBox.show()) {
-			File selectedFile = browser.getSelectedFile(0);
-			fileName->setText( selectedFile.getFileName(), dontSendNotification);
-			if (pCom != nullptr) {
-				pCom->setFile(selectedFile);
-				statusBar->setText("  Hex firmware file selected", dontSendNotification);
-				if (pCom->isPortOpen())
-					connectButton->setEnabled(true);
-			}
-		}
-
-        //[/UserButtonCode_browseButton]
-    }
-    else if (buttonThatWasClicked == connectButton)
-    {
-        //[UserButtonCode_connectButton] -- add your button handler code here..
-
-		browseButton->setEnabled(false);
-		connectButton->setEnabled(false);
-		pCom->startThread();;
-
-		//statusBar->setText("  Waiting to connect...", sendNotification);
-		//if (pCom->connect()) {
-		//	statusBar->setText("  Connected", sendNotification);
-		//	eraseButton->setEnabled(true);
-		//	programButton->setEnabled(true); //TEMPORARY DEBUG
-		//}
-		//else
-		//	statusBar->setText("  Connect to target failed!", sendNotification);
-
-        //[/UserButtonCode_connectButton]
-    }
     else if (buttonThatWasClicked == helpButton)
     {
         //[UserButtonCode_helpButton] -- add your button handler code here..
@@ -396,6 +384,8 @@ void MainComponent::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == playsoloButton1)
     {
         //[UserButtonCode_playsoloButton1] -- add your button handler code here..
+		iVal = trigText1->getText();
+		pCom->controlTrack(TRACK_PLAY_SOLO, 1);
         //[/UserButtonCode_playsoloButton1]
     }
     else if (buttonThatWasClicked == playmixButton1)
@@ -426,15 +416,7 @@ void MainComponent::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == versionButton)
     {
         //[UserButtonCode_versionButton] -- add your button handler code here..
-
-		String ver;
-		if (pCom->getVersion(&ver))
-			versionText->setText(ver, dontSendNotification);
-		else {
-			statusBar->setText("  Could not get version string", dontSendNotification);
-			versionText->setText("", dontSendNotification);
-		}
-
+		pCom->getDeviceInfo();
         //[/UserButtonCode_versionButton]
     }
 
@@ -458,12 +440,11 @@ void MainComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 				pCom->closePort();
 			if (pCom->openPort(pN)) {
 				statusBar->setText("  COM port opened successfully", dontSendNotification);
-				if (pCom->isHexFileSelected())
-					connectButton->setEnabled(true);
+				//connectButton->setEnabled(true);
 			}
 			else {
 				statusBar->setText("  COM port could not be opened!", dontSendNotification);
-				connectButton->setEnabled(false);
+				//connectButton->setEnabled(false);
 			}
 		}
 
@@ -487,66 +468,41 @@ void MainComponent::changeListenerCallback(ChangeBroadcaster *)
 {
 
 int dState;
+int msgLen;
+int iVal;
+unsigned char msgBuff[MAX_MESSAGE_LENGTH + 8];
+String sVal = "";
 
 	dState = pCom->getState();
-	switch (dState) {
-		case DLSTATE_CONNECTING:
-			statusBar->setText("  Waiting to connect...", sendNotification);
-		break;
-		case DLSTATE_ERROR_CONNECT:
-			statusBar->setText("  Couldn't connect!", sendNotification);
-			browseButton->setEnabled(true);
-			connectButton->setEnabled(true);
-		break;
-		case DLSTATE_ERASING:
-			statusBar->setText("  Erasing Flash...", sendNotification);
-		break;
-		case DLSTATE_ERROR_ERASE:
-			statusBar->setText("  Erase failure!", sendNotification);
-			browseButton->setEnabled(true);
-			connectButton->setEnabled(true);
-		break;
-		case DLSTATE_PROGRAMMING_0:
-			statusBar->setText("  Programming Flash... 0%", sendNotification);
-		break;
-		case DLSTATE_PROGRAMMING_1:
-			statusBar->setText("  Programming Flash... 10%", sendNotification);
-		break;
-		case DLSTATE_PROGRAMMING_2:
-			statusBar->setText("  Programming Flash... 20%", sendNotification);
-		break;
-		case DLSTATE_PROGRAMMING_3:
-			statusBar->setText("  Programming Flash... 30%", sendNotification);
-		break;
-		case DLSTATE_PROGRAMMING_4:
-			statusBar->setText("  Programming Flash... 40%", sendNotification);
-		break;
-		case DLSTATE_PROGRAMMING_5:
-			statusBar->setText("  Programming Flash... 50%", sendNotification);
-		break;
-		case DLSTATE_PROGRAMMING_6:
-			statusBar->setText("  Programming Flash... 60%", sendNotification);
-		break;
-		case DLSTATE_PROGRAMMING_7:
-			statusBar->setText("  Programming Flash... 70%", sendNotification);
-		break;
-		case DLSTATE_PROGRAMMING_8:
-			statusBar->setText("  Programming Flash... 80%", sendNotification);
-		break;
-		case DLSTATE_PROGRAMMING_9:
-			statusBar->setText("  Programming Flash... 90%", sendNotification);
-		break;
-		case DLSTATE_ERROR_PROGRAM:
-			statusBar->setText("  Program failure!", sendNotification);
-			browseButton->setEnabled(true);
-			connectButton->setEnabled(true);
-		break;
-		case DLSTATE_DONE:
-			statusBar->setText("  Programming complete", sendNotification);
-			browseButton->setEnabled(true);
-			connectButton->setEnabled(true);
-		break;
+	if (pCom->isMsgReady()) {
+		msgLen = pCom->getMessage(msgBuff);
+		pCom->clearMsgReady();
+		if (msgLen > 0) {
+			switch (msgBuff[0]) {
+
+				case VERSION_STRING:
+					msgBuff[msgLen] = 0;
+					{ String ver((const char *)&msgBuff[1]);
+					versionText->setText(ver, dontSendNotification); }
+				break;
+
+				case SYSTEM_INFO:
+					sVal += (unsigned char)msgBuff[1];
+					numVoicesText->setText(sVal, dontSendNotification);
+					iVal = msgBuff[3];
+					iVal = (iVal << 8) + msgBuff[2];
+					sVal = "";
+					sVal += iVal;
+					numTracksText->setText(sVal, dontSendNotification);
+				break;
+			}
+		}
 	}
+	else {
+		if (dState == COMM_STARTED)
+			statusBar->setText("  COM thread started", dontSendNotification);
+	}
+
 }
 
 //[/MiscUserCode]
@@ -564,85 +520,99 @@ BEGIN_JUCER_METADATA
 <JUCER_COMPONENT documentType="Component" className="MainComponent" componentName=""
                  parentClasses="public Component, public ChangeListener" constructorParams=""
                  variableInitialisers="" snapPixels="8" snapActive="1" snapShown="1"
-                 overlayOpacity="0.330" fixedSize="1" initialWidth="680" initialHeight="480">
+                 overlayOpacity="0.330" fixedSize="1" initialWidth="800" initialHeight="620">
   <BACKGROUND backgroundColour="ff2a4dba"/>
+  <GROUPCOMPONENT name="new group" id="2cf21ac44d719d93" memberName="groupComponent"
+                  virtualName="" explicitFocusOrder="0" pos="416 24 360 160" title="Communications"/>
+  <GROUPCOMPONENT name="new group" id="faf9d7977149782a" memberName="groupComponent2"
+                  virtualName="" explicitFocusOrder="0" pos="24 24 360 160" title="WAV Trigger System Info"/>
   <SLIDER name="" id="a4b37bd1b46fdb64" memberName="volSlider" virtualName=""
-          explicitFocusOrder="0" pos="481 272 159 81" min="-80" max="10"
+          explicitFocusOrder="0" pos="33 488 159 81" min="-80" max="10"
           int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="50" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="" id="b3b1c85b4500968f" memberName="portBoxlabel3" virtualName=""
-         explicitFocusOrder="0" pos="582 330 72 16" textCol="ff000000"
+         explicitFocusOrder="0" pos="134 546 72 16" textCol="ff000000"
          edTextCol="ff000000" edBkgCol="0" labelText="Gain (dB)" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="16" bold="0" italic="0" justification="36"/>
   <LABEL name="" id="be4f6f2e5725a063" memberName="portBoxlabel" virtualName=""
-         explicitFocusOrder="0" pos="331 36 88 16" textCol="ff000000"
+         explicitFocusOrder="0" pos="442 60 88 16" textCol="ff000000"
          edTextCol="ff000000" edBkgCol="0" labelText="Serial Port:" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="16" bold="0" italic="0" justification="36"/>
   <TEXTBUTTON name="" id="bcf4f7b0888effe5" memberName="quitButton" virtualName=""
-              explicitFocusOrder="0" pos="592 416 63 24" buttonText="Quit"
+              explicitFocusOrder="0" pos="712 544 63 24" buttonText="Quit"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <COMBOBOX name="" id="a9377a9d1326182e" memberName="portBox" virtualName=""
-            explicitFocusOrder="0" pos="417 32 224 24" editable="0" layout="33"
+            explicitFocusOrder="0" pos="528 56 224 24" editable="0" layout="33"
             items="" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
-  <TEXTEDITOR name="" id="ca916c7769ac7e10" memberName="fileName" virtualName=""
-              explicitFocusOrder="0" pos="129 376 424 24" initialText="" multiline="0"
-              retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
-  <TEXTBUTTON name="" id="da05fe355f7a4684" memberName="browseButton" virtualName=""
-              explicitFocusOrder="0" pos="41 376 63 24" buttonText="Browse"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <LABEL name="new label" id="ef8d15cc5a4b63c3" memberName="statusBar"
          virtualName="" explicitFocusOrder="0" pos="0 0Rr 100% 24" bkgCol="ff8da3da"
          textCol="ffad0101" outlineCol="0" edTextCol="ff000000" edBkgCol="0"
          labelText="" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
-  <TEXTBUTTON name="" id="1b4e8bce7508aafa" memberName="connectButton" virtualName=""
-              explicitFocusOrder="0" pos="41 416 63 24" bgColOff="ff45c603"
-              buttonText="Program" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="d687ab0ae7e4a720" memberName="helpButton" virtualName=""
-              explicitFocusOrder="0" pos="512 416 63 24" buttonText="Help"
+              explicitFocusOrder="0" pos="632 544 63 24" buttonText="Help"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <HYPERLINKBUTTON name="new hyperlink" id="ad6d869b23db3dc7" memberName="hyperlinkButton"
-                   virtualName="" explicitFocusOrder="0" pos="240 416 200 24" tooltip="http://robertsonics.com/makerjam/support/"
-                   textCol="ffffffff" buttonText="Check for latest firmware" connectedEdges="0"
-                   needsCallback="0" radioGroupId="0" url="http://robertsonics.com/makerjam/support/"/>
   <COMBOBOX name="" id="2c59ca67fae45d22" memberName="baudBox" virtualName=""
-            explicitFocusOrder="0" pos="537 72 104 24" editable="0" layout="33"
+            explicitFocusOrder="0" pos="647 96 104 24" editable="0" layout="33"
             items="" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="" id="eb7446e9391f0d79" memberName="portBoxlabel2" virtualName=""
-         explicitFocusOrder="0" pos="457 76 81 16" textCol="ff000000"
+         explicitFocusOrder="0" pos="569 101 81 16" textCol="ff000000"
          edTextCol="ff000000" edBkgCol="0" labelText="Baudrate:" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="16" bold="0" italic="0" justification="36"/>
   <TEXTBUTTON name="" id="dbbab70ff7e44452" memberName="playsoloButton1" virtualName=""
-              explicitFocusOrder="0" pos="217 168 72 24" buttonText="Play Solo"
+              explicitFocusOrder="0" pos="265 248 72 24" buttonText="Play Solo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="51f8f1f4d874a866" memberName="playmixButton1" virtualName=""
-              explicitFocusOrder="0" pos="305 168 72 24" buttonText="Play Mix"
+              explicitFocusOrder="0" pos="353 248 72 24" buttonText="Play Mix"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="c902ffad93176b2c" memberName="stopButton1" virtualName=""
-              explicitFocusOrder="0" pos="569 168 72 24" buttonText="Stop"
+              explicitFocusOrder="0" pos="617 248 72 24" buttonText="Stop"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="" id="403473bc1f1cbd0b" memberName="loopToggle" virtualName=""
-                explicitFocusOrder="0" pos="134 167 64 24" buttonText="Loop"
+                explicitFocusOrder="0" pos="182 247 64 24" buttonText="Loop"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TEXTBUTTON name="" id="4300c5f8bc94f310" memberName="pauseButton1" virtualName=""
-              explicitFocusOrder="0" pos="393 168 72 24" buttonText="Pause"
+              explicitFocusOrder="0" pos="441 248 72 24" buttonText="Pause"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="9865d9baf642eb5f" memberName="resumeButton1" virtualName=""
-              explicitFocusOrder="0" pos="481 168 72 24" buttonText="Resume"
+              explicitFocusOrder="0" pos="529 248 72 24" buttonText="Resume"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTEDITOR name="" id="349bf31d6a377790" memberName="trigText1" virtualName=""
-              explicitFocusOrder="0" pos="43 168 55 24" initialText="1" multiline="0"
+              explicitFocusOrder="0" pos="91 248 55 24" initialText="1" multiline="0"
               retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
   <TEXTEDITOR name="" id="d897b478ba180688" memberName="versionText" virtualName=""
-              explicitFocusOrder="0" pos="40 32 248 24" initialText="" multiline="0"
+              explicitFocusOrder="0" pos="184 56 176 24" initialText="" multiline="0"
               retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
   <TEXTBUTTON name="" id="5ec42bc6370231ba" memberName="versionButton" virtualName=""
-              explicitFocusOrder="0" pos="40 72 63 24" buttonText="Version"
+              explicitFocusOrder="0" pos="48 136 63 24" buttonText="Get Info"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTEDITOR name="" id="ae4c7ab7b0e1ec37" memberName="numVoicesText" virtualName=""
+              explicitFocusOrder="0" pos="320 96 41 24" initialText="" multiline="0"
+              retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
+  <TEXTEDITOR name="" id="4b638d8174953262" memberName="numTracksText" virtualName=""
+              explicitFocusOrder="0" pos="320 136 41 24" initialText="" multiline="0"
+              retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
+  <GROUPCOMPONENT name="new group" id="69229fd352cbc9b2" memberName="groupComponent3"
+                  virtualName="" explicitFocusOrder="0" pos="32 208 744 256" title="Track Control"/>
+  <LABEL name="new label" id="373041437cee60c6" memberName="label" virtualName=""
+         explicitFocusOrder="0" pos="60 56 128 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Firmware Version:" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15" bold="0" italic="0" justification="33"/>
+  <LABEL name="new label" id="bd160dcc811ead8b" memberName="label2" virtualName=""
+         explicitFocusOrder="0" pos="150 97 175 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Number of Stereo Voices:" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15" bold="0" italic="0" justification="33"/>
+  <LABEL name="new label" id="204edbed6a3aa8bf" memberName="label3" virtualName=""
+         explicitFocusOrder="0" pos="163 136 163 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Number of WAV tracks:" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15" bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
