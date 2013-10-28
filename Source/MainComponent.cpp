@@ -500,11 +500,14 @@ void MainComponent::resized()
 void MainComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 {
     //[UsersliderValueChanged_Pre]
+	int iVal;
     //[/UsersliderValueChanged_Pre]
 
     if (sliderThatWasMoved == volSlider)
     {
         //[UserSliderCode_volSlider] -- add your slider handling code here..
+		iVal = (int)volSlider->getValue();
+		pCom->volume(iVal);
         //[/UserSliderCode_volSlider]
     }
 

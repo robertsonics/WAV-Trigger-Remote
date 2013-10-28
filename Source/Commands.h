@@ -28,6 +28,7 @@ enum {
     GET_SYS_INFO,
 	CONTROL_TRACK,
 	STOP_ALL,
+	VOLUME
 };
 
 enum {

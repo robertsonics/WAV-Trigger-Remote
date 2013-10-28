@@ -37,6 +37,7 @@ public:
 	void closePort(void);
 	bool getDeviceInfo();
 	bool controlTrack(int mode, int trackNum);
+	bool volume(int iVol);
 	bool stopAll(void);
 	int getState()				{ return m_State; }
 	bool isPortOpen()			{ return m_portOpenFlag; }

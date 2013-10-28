@@ -207,6 +207,33 @@ unsigned char xbuf[8];
 
 
 // **************************************************************************
+// stopAll
+bool Communicator::volume(int iVol) {
+
+unsigned char xbuf[8];
+unsigned short uVal;
+
+	if (pSP == nullptr)
+		return false;
+
+	// First, send the get version command
+	xbuf[0] = 0xF0;
+	xbuf[1] = 0xaa;
+	xbuf[2] = 0x07;
+	xbuf[3] = VOLUME;
+
+	uVal = (unsigned short)iVol;
+	xbuf[4] = (unsigned char)uVal;
+	xbuf[5] = (unsigned short)(uVal >> 8);
+
+	xbuf[6] = 0x55;
+	pOutStream->write(xbuf, 7);
+
+	return true;
+}
+
+
+// **************************************************************************
 // controlTrack
 bool Communicator::controlTrack(int mode, int trackNum) {
 
