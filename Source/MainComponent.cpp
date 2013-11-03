@@ -34,12 +34,15 @@ MainComponent::MainComponent ()
 {
     addAndMakeVisible (groupComponent3 = new GroupComponent ("new group",
                                                              "Track Control"));
+    groupComponent3->setColour (GroupComponent::textColourId, Colours::white);
 
     addAndMakeVisible (groupComponent = new GroupComponent ("new group",
                                                             "Communications"));
+    groupComponent->setColour (GroupComponent::textColourId, Colours::white);
 
     addAndMakeVisible (groupComponent2 = new GroupComponent ("new group",
                                                              "WAV Trigger System Info"));
+    groupComponent2->setColour (GroupComponent::textColourId, Colours::white);
 
     addAndMakeVisible (volSlider = new Slider (String::empty));
     volSlider->setRange (-80, 10, 1);
@@ -112,7 +115,7 @@ MainComponent::MainComponent ()
     playsoloButton1->addListener (this);
 
     addAndMakeVisible (playmixButton1 = new TextButton (String::empty));
-    playmixButton1->setButtonText ("Play Mix");
+    playmixButton1->setButtonText ("Play Poly");
     playmixButton1->addListener (this);
 
     addAndMakeVisible (stopButton1 = new TextButton (String::empty));
@@ -200,7 +203,7 @@ MainComponent::MainComponent ()
     playsoloButton2->addListener (this);
 
     addAndMakeVisible (playmixButton2 = new TextButton (String::empty));
-    playmixButton2->setButtonText ("Play Mix");
+    playmixButton2->setButtonText ("Play Poly");
     playmixButton2->addListener (this);
 
     addAndMakeVisible (stopButton2 = new TextButton (String::empty));
@@ -233,7 +236,7 @@ MainComponent::MainComponent ()
     playsoloButton3->addListener (this);
 
     addAndMakeVisible (playmixButton3 = new TextButton (String::empty));
-    playmixButton3->setButtonText ("Play Mix");
+    playmixButton3->setButtonText ("Play Poly");
     playmixButton3->addListener (this);
 
     addAndMakeVisible (stopButton3 = new TextButton (String::empty));
@@ -266,7 +269,7 @@ MainComponent::MainComponent ()
     playsoloButton4->addListener (this);
 
     addAndMakeVisible (playmixButton4 = new TextButton (String::empty));
-    playmixButton4->setButtonText ("Play Mix");
+    playmixButton4->setButtonText ("Play Poly");
     playmixButton4->addListener (this);
 
     addAndMakeVisible (stopButton4 = new TextButton (String::empty));
@@ -859,11 +862,14 @@ BEGIN_JUCER_METADATA
                  overlayOpacity="0.330" fixedSize="1" initialWidth="800" initialHeight="620">
   <BACKGROUND backgroundColour="ff2a4dba"/>
   <GROUPCOMPONENT name="new group" id="69229fd352cbc9b2" memberName="groupComponent3"
-                  virtualName="" explicitFocusOrder="0" pos="24 208 752 272" title="Track Control"/>
+                  virtualName="" explicitFocusOrder="0" pos="24 208 752 272" textcol="ffffffff"
+                  title="Track Control"/>
   <GROUPCOMPONENT name="new group" id="2cf21ac44d719d93" memberName="groupComponent"
-                  virtualName="" explicitFocusOrder="0" pos="416 24 360 160" title="Communications"/>
+                  virtualName="" explicitFocusOrder="0" pos="416 24 360 160" textcol="ffffffff"
+                  title="Communications"/>
   <GROUPCOMPONENT name="new group" id="faf9d7977149782a" memberName="groupComponent2"
-                  virtualName="" explicitFocusOrder="0" pos="24 24 360 160" title="WAV Trigger System Info"/>
+                  virtualName="" explicitFocusOrder="0" pos="24 24 360 160" textcol="ffffffff"
+                  title="WAV Trigger System Info"/>
   <SLIDER name="" id="a4b37bd1b46fdb64" memberName="volSlider" virtualName=""
           explicitFocusOrder="0" pos="8 496 159 81" min="-80" max="10"
           int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
@@ -905,7 +911,7 @@ BEGIN_JUCER_METADATA
               explicitFocusOrder="0" pos="265 240 72 24" buttonText="Play Solo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="51f8f1f4d874a866" memberName="playmixButton1" virtualName=""
-              explicitFocusOrder="0" pos="353 240 72 24" buttonText="Play Mix"
+              explicitFocusOrder="0" pos="353 240 72 24" buttonText="Play Poly"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="c902ffad93176b2c" memberName="stopButton1" virtualName=""
               explicitFocusOrder="0" pos="617 240 72 24" buttonText="Stop"
@@ -953,7 +959,7 @@ BEGIN_JUCER_METADATA
               explicitFocusOrder="0" pos="265 289 72 24" buttonText="Play Solo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="5b12b9288609c1c3" memberName="playmixButton2" virtualName=""
-              explicitFocusOrder="0" pos="353 289 72 24" buttonText="Play Mix"
+              explicitFocusOrder="0" pos="353 289 72 24" buttonText="Play Poly"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="db164cb87a73ee5" memberName="stopButton2" virtualName=""
               explicitFocusOrder="0" pos="617 289 72 24" buttonText="Stop"
@@ -974,7 +980,7 @@ BEGIN_JUCER_METADATA
               explicitFocusOrder="0" pos="265 338 72 24" buttonText="Play Solo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="3ee79d9e92738b5f" memberName="playmixButton3" virtualName=""
-              explicitFocusOrder="0" pos="353 338 72 24" buttonText="Play Mix"
+              explicitFocusOrder="0" pos="353 338 72 24" buttonText="Play Poly"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="bdd21d937427de45" memberName="stopButton3" virtualName=""
               explicitFocusOrder="0" pos="617 338 72 24" buttonText="Stop"
@@ -995,7 +1001,7 @@ BEGIN_JUCER_METADATA
               explicitFocusOrder="0" pos="265 386 72 24" buttonText="Play Solo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="2ac5ec9cfa4d4951" memberName="playmixButton4" virtualName=""
-              explicitFocusOrder="0" pos="353 386 72 24" buttonText="Play Mix"
+              explicitFocusOrder="0" pos="353 386 72 24" buttonText="Play Poly"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="ed70635b82008bdf" memberName="stopButton4" virtualName=""
               explicitFocusOrder="0" pos="617 386 72 24" buttonText="Stop"
