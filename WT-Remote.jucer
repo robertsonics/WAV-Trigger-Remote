@@ -16,9 +16,9 @@
                objCExtraSuffix="JtTAKTK1s">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="WT-Remote"
-                       osxSDK="1" osxCompatibility="1" osxArchitecture="default"/>
+                       osxSDK="default" osxCompatibility="10.6 SDK" osxArchitecture="default"/>
         <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="WT-Remote"
-                       osxSDK="1" osxCompatibility="1" osxArchitecture="default"/>
+                       osxSDK="default" osxCompatibility="10.6 SDK" osxArchitecture="default"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_gui_extra" path="/Juce/modules"/>

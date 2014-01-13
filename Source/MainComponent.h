@@ -69,6 +69,7 @@ private:
     //[/UserVariables]
 
     //==============================================================================
+    ScopedPointer<GroupComponent> groupComponent4;
     ScopedPointer<GroupComponent> groupComponent3;
     ScopedPointer<GroupComponent> groupComponent;
     ScopedPointer<GroupComponent> groupComponent2;
@@ -117,6 +118,9 @@ private:
     ScopedPointer<TextButton> resumeButton4;
     ScopedPointer<TextEditor> trigText4;
     ScopedPointer<TextButton> stopAllButton;
+    ScopedPointer<TextButton> statusButton;
+    ScopedPointer<TextEditor> activeVoicesText;
+    ScopedPointer<Label> label4;
 
 
     //==============================================================================

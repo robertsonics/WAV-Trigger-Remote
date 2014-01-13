@@ -36,6 +36,7 @@ public:
 	bool openPort(String portName);
 	void closePort(void);
 	bool getDeviceInfo();
+	bool getDeviceStatus();
 	bool controlTrack(int mode, int trackNum);
 	bool volume(int iVol);
 	bool stopAll(void);

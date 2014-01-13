@@ -182,8 +182,29 @@ unsigned char xbuf[8];
 	pOutStream->write(xbuf, 5);
 
 	return true;
-
 }
+
+
+// **************************************************************************
+// getDeviceStatus
+bool Communicator::getDeviceStatus(void) {
+
+unsigned char xbuf[8];
+
+	if (pSP == nullptr)
+		return false;
+
+	// Send the get status command
+	xbuf[0] = 0xF0;
+	xbuf[1] = 0xaa;
+	xbuf[2] = 0x05;
+	xbuf[3] = GET_STATUS;
+	xbuf[4] = 0x55;
+	pOutStream->write(xbuf, 5);
+
+	return true;
+}
+
 
 // **************************************************************************
 // stopAll

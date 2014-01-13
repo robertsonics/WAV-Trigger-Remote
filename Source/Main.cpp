@@ -21,7 +21,7 @@ class ComUtilWindow  : public DocumentWindow
 public:
     //==============================================================================
     ComUtilWindow()
-        : DocumentWindow ("Robertsonics WAV Trigger Serial Control Utility v0.14",
+        : DocumentWindow ("Robertsonics   WAV Trigger Serial Control v0.20",
                           Colours::lightgrey,
                           DocumentWindow::allButtons,
                           true)

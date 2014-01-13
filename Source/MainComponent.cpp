@@ -32,6 +32,10 @@
 //==============================================================================
 MainComponent::MainComponent ()
 {
+    addAndMakeVisible (groupComponent4 = new GroupComponent ("new group",
+                                                             "Status"));
+    groupComponent4->setColour (GroupComponent::textColourId, Colours::white);
+
     addAndMakeVisible (groupComponent3 = new GroupComponent ("new group",
                                                              "Track Control"));
     groupComponent3->setColour (GroupComponent::textColourId, Colours::white);
@@ -85,7 +89,7 @@ MainComponent::MainComponent ()
     statusBar->setJustificationType (Justification::centredLeft);
     statusBar->setEditable (false, false, false);
     statusBar->setColour (Label::backgroundColourId, Colour (0xff8da3da));
-    statusBar->setColour (Label::textColourId, Colour (0xffad0101));
+    statusBar->setColour (Label::textColourId, Colours::black);
     statusBar->setColour (Label::outlineColourId, Colour (0x00000000));
     statusBar->setColour (TextEditor::textColourId, Colours::black);
     statusBar->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
@@ -301,6 +305,27 @@ MainComponent::MainComponent ()
     stopAllButton->setButtonText ("Stop All");
     stopAllButton->addListener (this);
 
+    addAndMakeVisible (statusButton = new TextButton (String::empty));
+    statusButton->setButtonText ("Update");
+    statusButton->addListener (this);
+
+    addAndMakeVisible (activeVoicesText = new TextEditor (String::empty));
+    activeVoicesText->setMultiLine (false);
+    activeVoicesText->setReturnKeyStartsNewLine (false);
+    activeVoicesText->setReadOnly (true);
+    activeVoicesText->setScrollbarsShown (false);
+    activeVoicesText->setCaretVisible (false);
+    activeVoicesText->setPopupMenuEnabled (true);
+    activeVoicesText->setText (String::empty);
+
+    addAndMakeVisible (label4 = new Label ("new label",
+                                           "Stereo voices playing"));
+    label4->setFont (Font (15.00f, Font::plain));
+    label4->setJustificationType (Justification::centredLeft);
+    label4->setEditable (false, false, false);
+    label4->setColour (TextEditor::textColourId, Colours::black);
+    label4->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -356,15 +381,15 @@ MainComponent::MainComponent ()
 		portBox->setSelectedId(m_portBoxItem);
 		String pN = portBox->getText();
 		if (pCom->openPort(pN))
-			statusBar->setText("  COM port opened successfully", dontSendNotification);
+			statusBar->setText("  >COM port opened successfully", dontSendNotification);
 		else
-			statusBar->setText("  COM port could not be opened!", dontSendNotification);
+			statusBar->setText("  >COM port could not be opened!", dontSendNotification);
 	}
 	else {
 		portBox->addItem("No USB Serial Devices!", 1);
 		m_portBoxItem = 1;
 		portBox->setSelectedId(m_portBoxItem);
-		statusBar->setText("  No compatible COM ports found", dontSendNotification);
+		statusBar->setText("  >No compatible COM ports found", dontSendNotification);
 	}
 
     //[/Constructor]
@@ -380,6 +405,7 @@ MainComponent::~MainComponent()
 	}
     //[/Destructor_pre]
 
+    groupComponent4 = nullptr;
     groupComponent3 = nullptr;
     groupComponent = nullptr;
     groupComponent2 = nullptr;
@@ -428,6 +454,9 @@ MainComponent::~MainComponent()
     resumeButton4 = nullptr;
     trigText4 = nullptr;
     stopAllButton = nullptr;
+    statusButton = nullptr;
+    activeVoicesText = nullptr;
+    label4 = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -448,6 +477,7 @@ void MainComponent::paint (Graphics& g)
 
 void MainComponent::resized()
 {
+    groupComponent4->setBounds (249, 504, 327, 70);
     groupComponent3->setBounds (24, 208, 752, 272);
     groupComponent->setBounds (416, 24, 360, 160);
     groupComponent2->setBounds (24, 24, 360, 160);
@@ -496,6 +526,9 @@ void MainComponent::resized()
     resumeButton4->setBounds (529, 386, 72, 24);
     trigText4->setBounds (91, 386, 55, 24);
     stopAllButton->setBounds (616, 432, 72, 24);
+    statusButton->setBounds (286, 532, 63, 24);
+    activeVoicesText->setBounds (375, 532, 33, 24);
+    label4->setBounds (416, 532, 144, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -758,6 +791,12 @@ void MainComponent::buttonClicked (Button* buttonThatWasClicked)
 		pCom->stopAll();
         //[/UserButtonCode_stopAllButton]
     }
+    else if (buttonThatWasClicked == statusButton)
+    {
+        //[UserButtonCode_statusButton] -- add your button handler code here..
+		pCom->getDeviceStatus();
+        //[/UserButtonCode_statusButton]
+    }
 
     //[UserbuttonClicked_Post]
     //[/UserbuttonClicked_Post]
@@ -778,11 +817,11 @@ void MainComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 			if (pCom->isPortOpen())
 				pCom->closePort();
 			if (pCom->openPort(pN)) {
-				statusBar->setText("  COM port opened successfully", dontSendNotification);
+				statusBar->setText("  >COM port opened successfully", dontSendNotification);
 				//connectButton->setEnabled(true);
 			}
 			else {
-				statusBar->setText("  COM port could not be opened!", dontSendNotification);
+				statusBar->setText("  >COM port could not be opened!", dontSendNotification);
 				//connectButton->setEnabled(false);
 			}
 		}
@@ -834,12 +873,21 @@ String sVal = "";
 					sVal += iVal;
 					numTracksText->setText(sVal, dontSendNotification);
 				break;
+
+				case CMD_STATUS:
+					iVal = msgLen - 3;
+					if (iVal < 2) iVal = 0;
+					iVal = iVal / 2;
+					sVal = "";
+					sVal += iVal;
+					activeVoicesText->setText(sVal, dontSendNotification);
+				break;
 			}
 		}
 	}
 	else {
 		if (dState == COMM_STARTED)
-			statusBar->setText("  COM thread started", dontSendNotification);
+			statusBar->setText("  >COM thread started", dontSendNotification);
 	}
 
 }
@@ -861,6 +909,9 @@ BEGIN_JUCER_METADATA
                  variableInitialisers="" snapPixels="8" snapActive="1" snapShown="1"
                  overlayOpacity="0.330" fixedSize="1" initialWidth="800" initialHeight="620">
   <BACKGROUND backgroundColour="ff2a4dba"/>
+  <GROUPCOMPONENT name="new group" id="2f2f9d0bb275a4cd" memberName="groupComponent4"
+                  virtualName="" explicitFocusOrder="0" pos="249 504 327 70" textcol="ffffffff"
+                  title="Status"/>
   <GROUPCOMPONENT name="new group" id="69229fd352cbc9b2" memberName="groupComponent3"
                   virtualName="" explicitFocusOrder="0" pos="24 208 752 272" textcol="ffffffff"
                   title="Track Control"/>
@@ -892,7 +943,7 @@ BEGIN_JUCER_METADATA
             items="" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="ef8d15cc5a4b63c3" memberName="statusBar"
          virtualName="" explicitFocusOrder="0" pos="0 0Rr 100% 24" bkgCol="ff8da3da"
-         textCol="ffad0101" outlineCol="0" edTextCol="ff000000" edBkgCol="0"
+         textCol="ff000000" outlineCol="0" edTextCol="ff000000" edBkgCol="0"
          labelText="" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
@@ -1021,6 +1072,17 @@ BEGIN_JUCER_METADATA
   <TEXTBUTTON name="" id="be0f5cd3d7919846" memberName="stopAllButton" virtualName=""
               explicitFocusOrder="0" pos="616 432 72 24" buttonText="Stop All"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="" id="a0525f7ba969cc61" memberName="statusButton" virtualName=""
+              explicitFocusOrder="0" pos="286 532 63 24" buttonText="Update"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTEDITOR name="" id="7955e0b540fa99a9" memberName="activeVoicesText" virtualName=""
+              explicitFocusOrder="0" pos="375 532 33 24" initialText="" multiline="0"
+              retKeyStartsLine="0" readonly="1" scrollbars="0" caret="0" popupmenu="1"/>
+  <LABEL name="new label" id="562907ed2eb03762" memberName="label4" virtualName=""
+         explicitFocusOrder="0" pos="416 532 144 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Stereo voices playing" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15" bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
