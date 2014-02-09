@@ -69,8 +69,8 @@ private:
     //[/UserVariables]
 
     //==============================================================================
-    ScopedPointer<GroupComponent> groupComponent4;
     ScopedPointer<GroupComponent> groupComponent3;
+    ScopedPointer<GroupComponent> groupComponent4;
     ScopedPointer<GroupComponent> groupComponent;
     ScopedPointer<GroupComponent> groupComponent2;
     ScopedPointer<Slider> volSlider;
@@ -121,6 +121,11 @@ private:
     ScopedPointer<TextButton> statusButton;
     ScopedPointer<TextEditor> activeVoicesText;
     ScopedPointer<Label> label4;
+    ScopedPointer<Slider> gainSlider1;
+    ScopedPointer<Slider> gainSlider2;
+    ScopedPointer<Slider> gainSlider3;
+    ScopedPointer<Slider> gainSlider4;
+    ScopedPointer<ToggleButton> ampToggle;
 
 
     //==============================================================================

@@ -32,13 +32,13 @@
 //==============================================================================
 MainComponent::MainComponent ()
 {
-    addAndMakeVisible (groupComponent4 = new GroupComponent ("new group",
-                                                             "Status"));
-    groupComponent4->setColour (GroupComponent::textColourId, Colours::white);
-
     addAndMakeVisible (groupComponent3 = new GroupComponent ("new group",
                                                              "Track Control"));
     groupComponent3->setColour (GroupComponent::textColourId, Colours::white);
+
+    addAndMakeVisible (groupComponent4 = new GroupComponent ("new group",
+                                                             "Status"));
+    groupComponent4->setColour (GroupComponent::textColourId, Colours::white);
 
     addAndMakeVisible (groupComponent = new GroupComponent ("new group",
                                                             "Communications"));
@@ -49,9 +49,10 @@ MainComponent::MainComponent ()
     groupComponent2->setColour (GroupComponent::textColourId, Colours::white);
 
     addAndMakeVisible (volSlider = new Slider (String::empty));
-    volSlider->setRange (-80, 10, 1);
+    volSlider->setRange (-70, 10, 1);
     volSlider->setSliderStyle (Slider::RotaryVerticalDrag);
     volSlider->setTextBoxStyle (Slider::TextBoxRight, false, 50, 20);
+    volSlider->setColour (Slider::rotarySliderFillColourId, Colour (0x7f000000));
     volSlider->addListener (this);
 
     addAndMakeVisible (portBoxlabel3 = new Label (String::empty,
@@ -326,6 +327,38 @@ MainComponent::MainComponent ()
     label4->setColour (TextEditor::textColourId, Colours::black);
     label4->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
+    addAndMakeVisible (gainSlider1 = new Slider (String::empty));
+    gainSlider1->setRange (-70, 10, 1);
+    gainSlider1->setSliderStyle (Slider::RotaryVerticalDrag);
+    gainSlider1->setTextBoxStyle (Slider::TextBoxRight, false, 40, 20);
+    gainSlider1->setColour (Slider::rotarySliderFillColourId, Colour (0x7f000000));
+    gainSlider1->addListener (this);
+
+    addAndMakeVisible (gainSlider2 = new Slider (String::empty));
+    gainSlider2->setRange (-70, 10, 1);
+    gainSlider2->setSliderStyle (Slider::RotaryVerticalDrag);
+    gainSlider2->setTextBoxStyle (Slider::TextBoxRight, false, 40, 20);
+    gainSlider2->setColour (Slider::rotarySliderFillColourId, Colour (0x7f000000));
+    gainSlider2->addListener (this);
+
+    addAndMakeVisible (gainSlider3 = new Slider (String::empty));
+    gainSlider3->setRange (-70, 10, 1);
+    gainSlider3->setSliderStyle (Slider::RotaryVerticalDrag);
+    gainSlider3->setTextBoxStyle (Slider::TextBoxRight, false, 40, 20);
+    gainSlider3->setColour (Slider::rotarySliderFillColourId, Colour (0x7f000000));
+    gainSlider3->addListener (this);
+
+    addAndMakeVisible (gainSlider4 = new Slider (String::empty));
+    gainSlider4->setRange (-70, 10, 1);
+    gainSlider4->setSliderStyle (Slider::RotaryVerticalDrag);
+    gainSlider4->setTextBoxStyle (Slider::TextBoxRight, false, 40, 20);
+    gainSlider4->setColour (Slider::rotarySliderFillColourId, Colour (0x7f000000));
+    gainSlider4->addListener (this);
+
+    addAndMakeVisible (ampToggle = new ToggleButton (String::empty));
+    ampToggle->setButtonText ("Amp Power");
+    ampToggle->addListener (this);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -405,8 +438,8 @@ MainComponent::~MainComponent()
 	}
     //[/Destructor_pre]
 
-    groupComponent4 = nullptr;
     groupComponent3 = nullptr;
+    groupComponent4 = nullptr;
     groupComponent = nullptr;
     groupComponent2 = nullptr;
     volSlider = nullptr;
@@ -457,6 +490,11 @@ MainComponent::~MainComponent()
     statusButton = nullptr;
     activeVoicesText = nullptr;
     label4 = nullptr;
+    gainSlider1 = nullptr;
+    gainSlider2 = nullptr;
+    gainSlider3 = nullptr;
+    gainSlider4 = nullptr;
+    ampToggle = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -477,26 +515,26 @@ void MainComponent::paint (Graphics& g)
 
 void MainComponent::resized()
 {
-    groupComponent4->setBounds (249, 504, 327, 70);
     groupComponent3->setBounds (24, 208, 752, 272);
+    groupComponent4->setBounds (340, 504, 327, 70);
     groupComponent->setBounds (416, 24, 360, 160);
     groupComponent2->setBounds (24, 24, 360, 160);
-    volSlider->setBounds (8, 496, 159, 81);
-    portBoxlabel3->setBounds (120, 552, 72, 16);
+    volSlider->setBounds (12, 510, 135, 60);
+    portBoxlabel3->setBounds (91, 557, 72, 16);
     portBoxlabel->setBounds (442, 60, 88, 16);
-    quitButton->setBounds (712, 544, 63, 24);
+    quitButton->setBounds (712, 548, 63, 24);
     portBox->setBounds (528, 56, 224, 24);
     statusBar->setBounds (0, getHeight() - 24, proportionOfWidth (1.0000f), 24);
-    helpButton->setBounds (632, 544, 63, 24);
+    helpButton->setBounds (712, 510, 63, 24);
     baudBox->setBounds (647, 96, 104, 24);
     portBoxlabel2->setBounds (569, 101, 81, 16);
-    playsoloButton1->setBounds (265, 240, 72, 24);
-    playmixButton1->setBounds (353, 240, 72, 24);
-    stopButton1->setBounds (617, 240, 72, 24);
-    loopToggle1->setBounds (182, 239, 64, 24);
-    pauseButton1->setBounds (441, 240, 72, 24);
-    resumeButton1->setBounds (529, 240, 72, 24);
-    trigText1->setBounds (91, 240, 55, 24);
+    playsoloButton1->setBounds (208, 240, 72, 24);
+    playmixButton1->setBounds (296, 240, 72, 24);
+    stopButton1->setBounds (560, 240, 72, 24);
+    loopToggle1->setBounds (139, 239, 64, 24);
+    pauseButton1->setBounds (384, 240, 72, 24);
+    resumeButton1->setBounds (472, 240, 72, 24);
+    trigText1->setBounds (68, 240, 55, 24);
     versionText->setBounds (184, 56, 176, 24);
     versionButton->setBounds (48, 136, 63, 24);
     numVoicesText->setBounds (320, 96, 41, 24);
@@ -504,31 +542,36 @@ void MainComponent::resized()
     label->setBounds (60, 56, 128, 24);
     label2->setBounds (150, 97, 175, 24);
     label3->setBounds (163, 136, 163, 24);
-    playsoloButton2->setBounds (265, 289, 72, 24);
-    playmixButton2->setBounds (353, 289, 72, 24);
-    stopButton2->setBounds (617, 289, 72, 24);
-    loopToggle2->setBounds (182, 288, 64, 24);
-    pauseButton2->setBounds (441, 289, 72, 24);
-    resumeButton2->setBounds (529, 289, 72, 24);
-    trigText2->setBounds (91, 289, 55, 24);
-    playsoloButton3->setBounds (265, 338, 72, 24);
-    playmixButton3->setBounds (353, 338, 72, 24);
-    stopButton3->setBounds (617, 338, 72, 24);
-    loopToggle3->setBounds (182, 337, 64, 24);
-    pauseButton3->setBounds (441, 338, 72, 24);
-    resumeButton3->setBounds (529, 338, 72, 24);
-    trigText3->setBounds (91, 338, 55, 24);
-    playsoloButton4->setBounds (265, 386, 72, 24);
-    playmixButton4->setBounds (353, 386, 72, 24);
-    stopButton4->setBounds (617, 386, 72, 24);
-    loopToggle4->setBounds (182, 385, 64, 24);
-    pauseButton4->setBounds (441, 386, 72, 24);
-    resumeButton4->setBounds (529, 386, 72, 24);
-    trigText4->setBounds (91, 386, 55, 24);
-    stopAllButton->setBounds (616, 432, 72, 24);
-    statusButton->setBounds (286, 532, 63, 24);
-    activeVoicesText->setBounds (375, 532, 33, 24);
-    label4->setBounds (416, 532, 144, 24);
+    playsoloButton2->setBounds (208, 289, 72, 24);
+    playmixButton2->setBounds (296, 289, 72, 24);
+    stopButton2->setBounds (560, 289, 72, 24);
+    loopToggle2->setBounds (139, 288, 64, 24);
+    pauseButton2->setBounds (384, 289, 72, 24);
+    resumeButton2->setBounds (472, 289, 72, 24);
+    trigText2->setBounds (68, 289, 55, 24);
+    playsoloButton3->setBounds (208, 338, 72, 24);
+    playmixButton3->setBounds (296, 338, 72, 24);
+    stopButton3->setBounds (560, 338, 72, 24);
+    loopToggle3->setBounds (139, 337, 64, 24);
+    pauseButton3->setBounds (384, 338, 72, 24);
+    resumeButton3->setBounds (472, 338, 72, 24);
+    trigText3->setBounds (68, 338, 55, 24);
+    playsoloButton4->setBounds (208, 386, 72, 24);
+    playmixButton4->setBounds (296, 386, 72, 24);
+    stopButton4->setBounds (560, 386, 72, 24);
+    loopToggle4->setBounds (139, 385, 64, 24);
+    pauseButton4->setBounds (384, 386, 72, 24);
+    resumeButton4->setBounds (472, 386, 72, 24);
+    trigText4->setBounds (68, 386, 55, 24);
+    stopAllButton->setBounds (559, 432, 72, 24);
+    statusButton->setBounds (377, 532, 63, 24);
+    activeVoicesText->setBounds (466, 532, 33, 24);
+    label4->setBounds (507, 532, 144, 24);
+    gainSlider1->setBounds (646, 239, 90, 30);
+    gainSlider2->setBounds (646, 288, 90, 30);
+    gainSlider3->setBounds (646, 335, 90, 30);
+    gainSlider4->setBounds (646, 382, 90, 30);
+    ampToggle->setBounds (208, 528, 112, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -536,7 +579,8 @@ void MainComponent::resized()
 void MainComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 {
     //[UsersliderValueChanged_Pre]
-	int iVal;
+	int iVal, tVal;
+	String sVal;
     //[/UsersliderValueChanged_Pre]
 
     if (sliderThatWasMoved == volSlider)
@@ -545,6 +589,42 @@ void MainComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 		iVal = (int)volSlider->getValue();
 		pCom->volume(iVal);
         //[/UserSliderCode_volSlider]
+    }
+    else if (sliderThatWasMoved == gainSlider1)
+    {
+        //[UserSliderCode_gainSlider1] -- add your slider handling code here..
+		sVal = trigText1->getText();
+		tVal = sVal.getIntValue();
+		iVal = (int)gainSlider1->getValue();
+		pCom->trackVolume(tVal, iVal);
+        //[/UserSliderCode_gainSlider1]
+    }
+    else if (sliderThatWasMoved == gainSlider2)
+    {
+        //[UserSliderCode_gainSlider2] -- add your slider handling code here..
+		sVal = trigText2->getText();
+		tVal = sVal.getIntValue();
+		iVal = (int)gainSlider2->getValue();
+		pCom->trackVolume(tVal, iVal);
+        //[/UserSliderCode_gainSlider2]
+    }
+    else if (sliderThatWasMoved == gainSlider3)
+    {
+        //[UserSliderCode_gainSlider3] -- add your slider handling code here..
+		sVal = trigText3->getText();
+		tVal = sVal.getIntValue();
+		iVal = (int)gainSlider3->getValue();
+		pCom->trackVolume(tVal, iVal);
+        //[/UserSliderCode_gainSlider3]
+    }
+    else if (sliderThatWasMoved == gainSlider4)
+    {
+        //[UserSliderCode_gainSlider4] -- add your slider handling code here..
+ 		sVal = trigText4->getText();
+		tVal = sVal.getIntValue();
+		iVal = (int)gainSlider4->getValue();
+		pCom->trackVolume(tVal, iVal);
+        //[/UserSliderCode_gainSlider4]
     }
 
     //[UsersliderValueChanged_Post]
@@ -797,6 +877,15 @@ void MainComponent::buttonClicked (Button* buttonThatWasClicked)
 		pCom->getDeviceStatus();
         //[/UserButtonCode_statusButton]
     }
+    else if (buttonThatWasClicked == ampToggle)
+    {
+        //[UserButtonCode_ampToggle] -- add your button handler code here..
+		if (ampToggle->getToggleState())
+			pCom->ampPower(true);
+		else
+			pCom->ampPower(false);
+        //[/UserButtonCode_ampToggle]
+    }
 
     //[UserbuttonClicked_Post]
     //[/UserbuttonClicked_Post]
@@ -909,12 +998,12 @@ BEGIN_JUCER_METADATA
                  variableInitialisers="" snapPixels="8" snapActive="1" snapShown="1"
                  overlayOpacity="0.330" fixedSize="1" initialWidth="800" initialHeight="620">
   <BACKGROUND backgroundColour="ff2a4dba"/>
-  <GROUPCOMPONENT name="new group" id="2f2f9d0bb275a4cd" memberName="groupComponent4"
-                  virtualName="" explicitFocusOrder="0" pos="249 504 327 70" textcol="ffffffff"
-                  title="Status"/>
   <GROUPCOMPONENT name="new group" id="69229fd352cbc9b2" memberName="groupComponent3"
                   virtualName="" explicitFocusOrder="0" pos="24 208 752 272" textcol="ffffffff"
                   title="Track Control"/>
+  <GROUPCOMPONENT name="new group" id="2f2f9d0bb275a4cd" memberName="groupComponent4"
+                  virtualName="" explicitFocusOrder="0" pos="340 504 327 70" textcol="ffffffff"
+                  title="Status"/>
   <GROUPCOMPONENT name="new group" id="2cf21ac44d719d93" memberName="groupComponent"
                   virtualName="" explicitFocusOrder="0" pos="416 24 360 160" textcol="ffffffff"
                   title="Communications"/>
@@ -922,11 +1011,11 @@ BEGIN_JUCER_METADATA
                   virtualName="" explicitFocusOrder="0" pos="24 24 360 160" textcol="ffffffff"
                   title="WAV Trigger System Info"/>
   <SLIDER name="" id="a4b37bd1b46fdb64" memberName="volSlider" virtualName=""
-          explicitFocusOrder="0" pos="8 496 159 81" min="-80" max="10"
-          int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
+          explicitFocusOrder="0" pos="12 510 135 60" rotarysliderfill="7f000000"
+          min="-70" max="10" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="50" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="" id="b3b1c85b4500968f" memberName="portBoxlabel3" virtualName=""
-         explicitFocusOrder="0" pos="120 552 72 16" textCol="ff000000"
+         explicitFocusOrder="0" pos="91 557 72 16" textCol="ff000000"
          edTextCol="ff000000" edBkgCol="0" labelText="Gain (dB)" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="16" bold="0" italic="0" justification="36"/>
@@ -936,7 +1025,7 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="16" bold="0" italic="0" justification="36"/>
   <TEXTBUTTON name="" id="bcf4f7b0888effe5" memberName="quitButton" virtualName=""
-              explicitFocusOrder="0" pos="712 544 63 24" buttonText="Quit"
+              explicitFocusOrder="0" pos="712 548 63 24" buttonText="Quit"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <COMBOBOX name="" id="a9377a9d1326182e" memberName="portBox" virtualName=""
             explicitFocusOrder="0" pos="528 56 224 24" editable="0" layout="33"
@@ -948,7 +1037,7 @@ BEGIN_JUCER_METADATA
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="" id="d687ab0ae7e4a720" memberName="helpButton" virtualName=""
-              explicitFocusOrder="0" pos="632 544 63 24" buttonText="Help"
+              explicitFocusOrder="0" pos="712 510 63 24" buttonText="Help"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <COMBOBOX name="" id="2c59ca67fae45d22" memberName="baudBox" virtualName=""
             explicitFocusOrder="0" pos="647 96 104 24" editable="0" layout="33"
@@ -959,25 +1048,25 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="16" bold="0" italic="0" justification="36"/>
   <TEXTBUTTON name="" id="dbbab70ff7e44452" memberName="playsoloButton1" virtualName=""
-              explicitFocusOrder="0" pos="265 240 72 24" buttonText="Play Solo"
+              explicitFocusOrder="0" pos="208 240 72 24" buttonText="Play Solo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="51f8f1f4d874a866" memberName="playmixButton1" virtualName=""
-              explicitFocusOrder="0" pos="353 240 72 24" buttonText="Play Poly"
+              explicitFocusOrder="0" pos="296 240 72 24" buttonText="Play Poly"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="c902ffad93176b2c" memberName="stopButton1" virtualName=""
-              explicitFocusOrder="0" pos="617 240 72 24" buttonText="Stop"
+              explicitFocusOrder="0" pos="560 240 72 24" buttonText="Stop"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="" id="403473bc1f1cbd0b" memberName="loopToggle1" virtualName=""
-                explicitFocusOrder="0" pos="182 239 64 24" buttonText="Loop"
+                explicitFocusOrder="0" pos="139 239 64 24" buttonText="Loop"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TEXTBUTTON name="" id="4300c5f8bc94f310" memberName="pauseButton1" virtualName=""
-              explicitFocusOrder="0" pos="441 240 72 24" buttonText="Pause"
+              explicitFocusOrder="0" pos="384 240 72 24" buttonText="Pause"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="9865d9baf642eb5f" memberName="resumeButton1" virtualName=""
-              explicitFocusOrder="0" pos="529 240 72 24" buttonText="Resume"
+              explicitFocusOrder="0" pos="472 240 72 24" buttonText="Resume"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTEDITOR name="" id="349bf31d6a377790" memberName="trigText1" virtualName=""
-              explicitFocusOrder="0" pos="91 240 55 24" initialText="1" multiline="0"
+              explicitFocusOrder="0" pos="68 240 55 24" initialText="1" multiline="0"
               retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
   <TEXTEDITOR name="" id="d897b478ba180688" memberName="versionText" virtualName=""
               explicitFocusOrder="0" pos="184 56 176 24" initialText="" multiline="0"
@@ -1007,82 +1096,101 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="" id="7f0e6681b9cd0f73" memberName="playsoloButton2" virtualName=""
-              explicitFocusOrder="0" pos="265 289 72 24" buttonText="Play Solo"
+              explicitFocusOrder="0" pos="208 289 72 24" buttonText="Play Solo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="5b12b9288609c1c3" memberName="playmixButton2" virtualName=""
-              explicitFocusOrder="0" pos="353 289 72 24" buttonText="Play Poly"
+              explicitFocusOrder="0" pos="296 289 72 24" buttonText="Play Poly"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="db164cb87a73ee5" memberName="stopButton2" virtualName=""
-              explicitFocusOrder="0" pos="617 289 72 24" buttonText="Stop"
+              explicitFocusOrder="0" pos="560 289 72 24" buttonText="Stop"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="" id="6bd56188c0903ee2" memberName="loopToggle2" virtualName=""
-                explicitFocusOrder="0" pos="182 288 64 24" buttonText="Loop"
+                explicitFocusOrder="0" pos="139 288 64 24" buttonText="Loop"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TEXTBUTTON name="" id="1642d5e074a6111e" memberName="pauseButton2" virtualName=""
-              explicitFocusOrder="0" pos="441 289 72 24" buttonText="Pause"
+              explicitFocusOrder="0" pos="384 289 72 24" buttonText="Pause"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="3e4d4c740ddd1bc3" memberName="resumeButton2" virtualName=""
-              explicitFocusOrder="0" pos="529 289 72 24" buttonText="Resume"
+              explicitFocusOrder="0" pos="472 289 72 24" buttonText="Resume"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTEDITOR name="" id="2b590d01f2235d90" memberName="trigText2" virtualName=""
-              explicitFocusOrder="0" pos="91 289 55 24" initialText="2" multiline="0"
+              explicitFocusOrder="0" pos="68 289 55 24" initialText="2" multiline="0"
               retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
   <TEXTBUTTON name="" id="d73e3cf999c54579" memberName="playsoloButton3" virtualName=""
-              explicitFocusOrder="0" pos="265 338 72 24" buttonText="Play Solo"
+              explicitFocusOrder="0" pos="208 338 72 24" buttonText="Play Solo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="3ee79d9e92738b5f" memberName="playmixButton3" virtualName=""
-              explicitFocusOrder="0" pos="353 338 72 24" buttonText="Play Poly"
+              explicitFocusOrder="0" pos="296 338 72 24" buttonText="Play Poly"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="bdd21d937427de45" memberName="stopButton3" virtualName=""
-              explicitFocusOrder="0" pos="617 338 72 24" buttonText="Stop"
+              explicitFocusOrder="0" pos="560 338 72 24" buttonText="Stop"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="" id="31a413cdebdb1e8b" memberName="loopToggle3" virtualName=""
-                explicitFocusOrder="0" pos="182 337 64 24" buttonText="Loop"
+                explicitFocusOrder="0" pos="139 337 64 24" buttonText="Loop"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TEXTBUTTON name="" id="f4dbf44b658c9e30" memberName="pauseButton3" virtualName=""
-              explicitFocusOrder="0" pos="441 338 72 24" buttonText="Pause"
+              explicitFocusOrder="0" pos="384 338 72 24" buttonText="Pause"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="249ead5e9b5d4a0" memberName="resumeButton3" virtualName=""
-              explicitFocusOrder="0" pos="529 338 72 24" buttonText="Resume"
+              explicitFocusOrder="0" pos="472 338 72 24" buttonText="Resume"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTEDITOR name="" id="7da7f44767016f2f" memberName="trigText3" virtualName=""
-              explicitFocusOrder="0" pos="91 338 55 24" initialText="3" multiline="0"
+              explicitFocusOrder="0" pos="68 338 55 24" initialText="3" multiline="0"
               retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
   <TEXTBUTTON name="" id="a90629870d2b8c10" memberName="playsoloButton4" virtualName=""
-              explicitFocusOrder="0" pos="265 386 72 24" buttonText="Play Solo"
+              explicitFocusOrder="0" pos="208 386 72 24" buttonText="Play Solo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="2ac5ec9cfa4d4951" memberName="playmixButton4" virtualName=""
-              explicitFocusOrder="0" pos="353 386 72 24" buttonText="Play Poly"
+              explicitFocusOrder="0" pos="296 386 72 24" buttonText="Play Poly"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="ed70635b82008bdf" memberName="stopButton4" virtualName=""
-              explicitFocusOrder="0" pos="617 386 72 24" buttonText="Stop"
+              explicitFocusOrder="0" pos="560 386 72 24" buttonText="Stop"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="" id="62772798a04fa3de" memberName="loopToggle4" virtualName=""
-                explicitFocusOrder="0" pos="182 385 64 24" buttonText="Loop"
+                explicitFocusOrder="0" pos="139 385 64 24" buttonText="Loop"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TEXTBUTTON name="" id="697fd215367a3f8b" memberName="pauseButton4" virtualName=""
-              explicitFocusOrder="0" pos="441 386 72 24" buttonText="Pause"
+              explicitFocusOrder="0" pos="384 386 72 24" buttonText="Pause"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="d1e44c4da5163d80" memberName="resumeButton4" virtualName=""
-              explicitFocusOrder="0" pos="529 386 72 24" buttonText="Resume"
+              explicitFocusOrder="0" pos="472 386 72 24" buttonText="Resume"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTEDITOR name="" id="fa324c00c2f845ca" memberName="trigText4" virtualName=""
-              explicitFocusOrder="0" pos="91 386 55 24" initialText="4" multiline="0"
+              explicitFocusOrder="0" pos="68 386 55 24" initialText="4" multiline="0"
               retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
   <TEXTBUTTON name="" id="be0f5cd3d7919846" memberName="stopAllButton" virtualName=""
-              explicitFocusOrder="0" pos="616 432 72 24" buttonText="Stop All"
+              explicitFocusOrder="0" pos="559 432 72 24" buttonText="Stop All"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="a0525f7ba969cc61" memberName="statusButton" virtualName=""
-              explicitFocusOrder="0" pos="286 532 63 24" buttonText="Update"
+              explicitFocusOrder="0" pos="377 532 63 24" buttonText="Update"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTEDITOR name="" id="7955e0b540fa99a9" memberName="activeVoicesText" virtualName=""
-              explicitFocusOrder="0" pos="375 532 33 24" initialText="" multiline="0"
+              explicitFocusOrder="0" pos="466 532 33 24" initialText="" multiline="0"
               retKeyStartsLine="0" readonly="1" scrollbars="0" caret="0" popupmenu="1"/>
   <LABEL name="new label" id="562907ed2eb03762" memberName="label4" virtualName=""
-         explicitFocusOrder="0" pos="416 532 144 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="507 532 144 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Stereo voices playing" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
+  <SLIDER name="" id="6f666b645a6cc4e1" memberName="gainSlider1" virtualName=""
+          explicitFocusOrder="0" pos="646 239 90 30" rotarysliderfill="7f000000"
+          min="-70" max="10" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
+          textBoxEditable="1" textBoxWidth="40" textBoxHeight="20" skewFactor="1"/>
+  <SLIDER name="" id="1d1be3038a09674b" memberName="gainSlider2" virtualName=""
+          explicitFocusOrder="0" pos="646 288 90 30" rotarysliderfill="7f000000"
+          min="-70" max="10" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
+          textBoxEditable="1" textBoxWidth="40" textBoxHeight="20" skewFactor="1"/>
+  <SLIDER name="" id="73fd6546db69fcf2" memberName="gainSlider3" virtualName=""
+          explicitFocusOrder="0" pos="646 335 90 30" rotarysliderfill="7f000000"
+          min="-70" max="10" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
+          textBoxEditable="1" textBoxWidth="40" textBoxHeight="20" skewFactor="1"/>
+  <SLIDER name="" id="10e7e96188454810" memberName="gainSlider4" virtualName=""
+          explicitFocusOrder="0" pos="646 382 90 30" rotarysliderfill="7f000000"
+          min="-70" max="10" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
+          textBoxEditable="1" textBoxWidth="40" textBoxHeight="20" skewFactor="1"/>
+  <TOGGLEBUTTON name="" id="2b535ea7e7cfbb6b" memberName="ampToggle" virtualName=""
+                explicitFocusOrder="0" pos="208 528 112 24" buttonText="Amp Power"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

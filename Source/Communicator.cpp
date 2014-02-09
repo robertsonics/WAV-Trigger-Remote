@@ -180,7 +180,6 @@ unsigned char xbuf[8];
 	// Then send the get info command
 	xbuf[3] = GET_SYS_INFO;
 	pOutStream->write(xbuf, 5);
-
 	return true;
 }
 
@@ -194,14 +193,12 @@ unsigned char xbuf[8];
 	if (pSP == nullptr)
 		return false;
 
-	// Send the get status command
 	xbuf[0] = 0xF0;
 	xbuf[1] = 0xaa;
 	xbuf[2] = 0x05;
 	xbuf[3] = GET_STATUS;
 	xbuf[4] = 0x55;
 	pOutStream->write(xbuf, 5);
-
 	return true;
 }
 
@@ -215,14 +212,12 @@ unsigned char xbuf[8];
 	if (pSP == nullptr)
 		return false;
 
-	// First, send the get version command
 	xbuf[0] = 0xF0;
 	xbuf[1] = 0xaa;
 	xbuf[2] = 0x05;
 	xbuf[3] = STOP_ALL;
 	xbuf[4] = 0x55;
 	pOutStream->write(xbuf, 5);
-
 	return true;
 }
 
@@ -237,19 +232,15 @@ unsigned short uVal;
 	if (pSP == nullptr)
 		return false;
 
-	// First, send the get version command
 	xbuf[0] = 0xF0;
 	xbuf[1] = 0xaa;
 	xbuf[2] = 0x07;
 	xbuf[3] = VOLUME;
-
 	uVal = (unsigned short)iVol;
 	xbuf[4] = (unsigned char)uVal;
 	xbuf[5] = (unsigned short)(uVal >> 8);
-
 	xbuf[6] = 0x55;
 	pOutStream->write(xbuf, 7);
-
 	return true;
 }
 
@@ -266,7 +257,6 @@ unsigned char xbuf[8];
 	if (trackNum > 999)
 		return false;
 
-	// First, 
 	xbuf[0] = 0xF0;
 	xbuf[1] = 0xaa;
 	xbuf[2] = 0x08;
@@ -276,6 +266,57 @@ unsigned char xbuf[8];
 	xbuf[6] = (unsigned char)(trackNum >> 8);
 	xbuf[7] = 0x55;
 	pOutStream->write(xbuf, 8);
+	return true;
+}
+
+
+// **************************************************************************
+// trackVolume
+bool Communicator::trackVolume(int trackNum, int iVol) {
+
+unsigned char xbuf[8];
+unsigned short uVal;
+
+	if (pSP == nullptr)
+		return false;
+
+	if (trackNum > 999)
+		return false;
+
+	xbuf[0] = 0xF0;
+	xbuf[1] = 0xaa;
+	xbuf[2] = 0x09;
+	xbuf[3] = TRACK_VOLUME;
+	xbuf[4] = (unsigned char)trackNum;
+	xbuf[5] = (unsigned char)(trackNum >> 8);
+	uVal = (unsigned short)iVol;
+	xbuf[6] = (unsigned char)uVal;
+	xbuf[7] = (unsigned short)(uVal >> 8);
+	xbuf[8] = 0x55;
+	pOutStream->write(xbuf, 9);
+	return true;
+}
+
+
+// **************************************************************************
+// ampPower
+bool Communicator::ampPower(bool ampState) {
+
+unsigned char xbuf[8];
+
+	if (pSP == nullptr)
+		return false;
+
+	xbuf[0] = 0xF0;
+	xbuf[1] = 0xaa;
+	xbuf[2] = 0x06;
+	xbuf[3] = AMP_POWER;
+	if (ampState)
+		xbuf[4] = 0x01;
+	else
+		xbuf[4] = 0x00;
+	xbuf[5] = 0x55;
+	pOutStream->write(xbuf, 6);
 	return true;
 }
 

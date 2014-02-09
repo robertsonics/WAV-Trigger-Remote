@@ -38,7 +38,9 @@ public:
 	bool getDeviceInfo();
 	bool getDeviceStatus();
 	bool controlTrack(int mode, int trackNum);
+	bool trackVolume(int trackNum, int iVol);
 	bool volume(int iVol);
+	bool ampPower(bool ampState);
 	bool stopAll(void);
 	int getState()				{ return m_State; }
 	bool isPortOpen()			{ return m_portOpenFlag; }
