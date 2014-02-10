@@ -161,7 +161,7 @@ void Communicator::closePort(void)
 // getDeviceInfo
 bool Communicator::getDeviceInfo(void) {
 
-unsigned char xbuf[8];
+unsigned char xbuf[16];
 
 	if (pSP == nullptr)
 		return false;
@@ -188,7 +188,7 @@ unsigned char xbuf[8];
 // getDeviceStatus
 bool Communicator::getDeviceStatus(void) {
 
-unsigned char xbuf[8];
+unsigned char xbuf[16];
 
 	if (pSP == nullptr)
 		return false;
@@ -207,7 +207,7 @@ unsigned char xbuf[8];
 // stopAll
 bool Communicator::stopAll(void) {
 
-unsigned char xbuf[8];
+unsigned char xbuf[16];
 
 	if (pSP == nullptr)
 		return false;
@@ -226,7 +226,7 @@ unsigned char xbuf[8];
 // stopAll
 bool Communicator::volume(int iVol) {
 
-unsigned char xbuf[8];
+unsigned char xbuf[16];
 unsigned short uVal;
 
 	if (pSP == nullptr)
@@ -249,7 +249,7 @@ unsigned short uVal;
 // controlTrack
 bool Communicator::controlTrack(int mode, int trackNum) {
 
-unsigned char xbuf[8];
+unsigned char xbuf[16];
 
 	if (pSP == nullptr)
 		return false;
@@ -274,7 +274,7 @@ unsigned char xbuf[8];
 // trackVolume
 bool Communicator::trackVolume(int trackNum, int iVol) {
 
-unsigned char xbuf[8];
+unsigned char xbuf[16];
 unsigned short uVal;
 
 	if (pSP == nullptr)
@@ -302,7 +302,7 @@ unsigned short uVal;
 // ampPower
 bool Communicator::ampPower(bool ampState) {
 
-unsigned char xbuf[8];
+unsigned char xbuf[16];
 
 	if (pSP == nullptr)
 		return false;
