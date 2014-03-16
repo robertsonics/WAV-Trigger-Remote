@@ -100,13 +100,13 @@ bool Communicator::openPort( String portName )
 
 #if WIN32
 
-String portID;
+String portID = "\\\\.\\";
 
 	int i = portName.indexOf("COM");
 	if (i >= 0) {
-		portID = portName.substring(i, i+5);
+		portID += portName.substring(i, i+5);
 		if (portID.contains(")"))
-			portID = portID.substring(0, 4);
+			portID = portID.substring(0, 8);
 	}
 	pSP = new SerialPort(portID, SerialPortConfig(57600, 8, SerialPortConfig::SERIALPORT_PARITY_EVEN, SerialPortConfig::STOPBITS_1, SerialPortConfig::FLOWCONTROL_NONE));
 
