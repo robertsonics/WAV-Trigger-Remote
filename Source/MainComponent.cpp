@@ -32,20 +32,24 @@
 //==============================================================================
 MainComponent::MainComponent ()
 {
+    addAndMakeVisible (groupComponent5 = new GroupComponent ("new group",
+                                                             TRANS("System")));
+    groupComponent5->setColour (GroupComponent::textColourId, Colours::white);
+
     addAndMakeVisible (groupComponent3 = new GroupComponent ("new group",
-                                                             "Track Control"));
+                                                             TRANS("Track Control")));
     groupComponent3->setColour (GroupComponent::textColourId, Colours::white);
 
     addAndMakeVisible (groupComponent4 = new GroupComponent ("new group",
-                                                             "Status"));
+                                                             TRANS("Status")));
     groupComponent4->setColour (GroupComponent::textColourId, Colours::white);
 
     addAndMakeVisible (groupComponent = new GroupComponent ("new group",
-                                                            "Communications"));
+                                                            TRANS("Communications")));
     groupComponent->setColour (GroupComponent::textColourId, Colours::white);
 
     addAndMakeVisible (groupComponent2 = new GroupComponent ("new group",
-                                                             "WAV Trigger System Info"));
+                                                             TRANS("WAV Trigger System Info")));
     groupComponent2->setColour (GroupComponent::textColourId, Colours::white);
 
     addAndMakeVisible (volSlider = new Slider (String::empty));
@@ -56,7 +60,7 @@ MainComponent::MainComponent ()
     volSlider->addListener (this);
 
     addAndMakeVisible (portBoxlabel3 = new Label (String::empty,
-                                                  "Gain (dB)"));
+                                                  TRANS("Gain (dB)")));
     portBoxlabel3->setFont (Font (16.00f, Font::plain));
     portBoxlabel3->setJustificationType (Justification::centred);
     portBoxlabel3->setEditable (false, false, false);
@@ -65,7 +69,7 @@ MainComponent::MainComponent ()
     portBoxlabel3->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (portBoxlabel = new Label (String::empty,
-                                                 "Serial Port:"));
+                                                 TRANS("Serial Port:")));
     portBoxlabel->setFont (Font (16.00f, Font::plain));
     portBoxlabel->setJustificationType (Justification::centred);
     portBoxlabel->setEditable (false, false, false);
@@ -74,14 +78,14 @@ MainComponent::MainComponent ()
     portBoxlabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (quitButton = new TextButton (String::empty));
-    quitButton->setButtonText ("Quit");
+    quitButton->setButtonText (TRANS("Quit"));
     quitButton->addListener (this);
 
     addAndMakeVisible (portBox = new ComboBox (String::empty));
     portBox->setEditableText (false);
     portBox->setJustificationType (Justification::centredLeft);
     portBox->setTextWhenNothingSelected (String::empty);
-    portBox->setTextWhenNoChoicesAvailable ("(no choices)");
+    portBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     portBox->addListener (this);
 
     addAndMakeVisible (statusBar = new Label ("new label",
@@ -96,18 +100,18 @@ MainComponent::MainComponent ()
     statusBar->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (helpButton = new TextButton (String::empty));
-    helpButton->setButtonText ("Help");
+    helpButton->setButtonText (TRANS("Help"));
     helpButton->addListener (this);
 
     addAndMakeVisible (baudBox = new ComboBox (String::empty));
     baudBox->setEditableText (false);
     baudBox->setJustificationType (Justification::centredLeft);
     baudBox->setTextWhenNothingSelected (String::empty);
-    baudBox->setTextWhenNoChoicesAvailable ("(no choices)");
+    baudBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     baudBox->addListener (this);
 
     addAndMakeVisible (portBoxlabel2 = new Label (String::empty,
-                                                  "Baudrate:"));
+                                                  TRANS("Baudrate:")));
     portBoxlabel2->setFont (Font (16.00f, Font::plain));
     portBoxlabel2->setJustificationType (Justification::centred);
     portBoxlabel2->setEditable (false, false, false);
@@ -116,27 +120,27 @@ MainComponent::MainComponent ()
     portBoxlabel2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (playsoloButton1 = new TextButton (String::empty));
-    playsoloButton1->setButtonText ("Play Solo");
+    playsoloButton1->setButtonText (TRANS("Play Solo"));
     playsoloButton1->addListener (this);
 
     addAndMakeVisible (playmixButton1 = new TextButton (String::empty));
-    playmixButton1->setButtonText ("Play Poly");
+    playmixButton1->setButtonText (TRANS("Play Poly"));
     playmixButton1->addListener (this);
 
     addAndMakeVisible (stopButton1 = new TextButton (String::empty));
-    stopButton1->setButtonText ("Stop");
+    stopButton1->setButtonText (TRANS("Stop"));
     stopButton1->addListener (this);
 
     addAndMakeVisible (loopToggle1 = new ToggleButton (String::empty));
-    loopToggle1->setButtonText ("Loop");
+    loopToggle1->setButtonText (TRANS("Loop"));
     loopToggle1->addListener (this);
 
     addAndMakeVisible (pauseButton1 = new TextButton (String::empty));
-    pauseButton1->setButtonText ("Pause");
+    pauseButton1->setButtonText (TRANS("Pause"));
     pauseButton1->addListener (this);
 
     addAndMakeVisible (resumeButton1 = new TextButton (String::empty));
-    resumeButton1->setButtonText ("Resume");
+    resumeButton1->setButtonText (TRANS("Resume"));
     resumeButton1->addListener (this);
 
     addAndMakeVisible (trigText1 = new TextEditor (String::empty));
@@ -146,7 +150,7 @@ MainComponent::MainComponent ()
     trigText1->setScrollbarsShown (true);
     trigText1->setCaretVisible (true);
     trigText1->setPopupMenuEnabled (true);
-    trigText1->setText ("1");
+    trigText1->setText (TRANS("1"));
 
     addAndMakeVisible (versionText = new TextEditor (String::empty));
     versionText->setMultiLine (false);
@@ -158,7 +162,7 @@ MainComponent::MainComponent ()
     versionText->setText (String::empty);
 
     addAndMakeVisible (versionButton = new TextButton (String::empty));
-    versionButton->setButtonText ("Get Info");
+    versionButton->setButtonText (TRANS("Get Info"));
     versionButton->addListener (this);
 
     addAndMakeVisible (numVoicesText = new TextEditor (String::empty));
@@ -180,7 +184,7 @@ MainComponent::MainComponent ()
     numTracksText->setText (String::empty);
 
     addAndMakeVisible (label = new Label ("new label",
-                                          "Firmware Version:"));
+                                          TRANS("Firmware Version:")));
     label->setFont (Font (15.00f, Font::plain));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
@@ -188,7 +192,7 @@ MainComponent::MainComponent ()
     label->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (label2 = new Label ("new label",
-                                           "Number of Stereo Voices:"));
+                                           TRANS("Number of Stereo Voices:")));
     label2->setFont (Font (15.00f, Font::plain));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
@@ -196,7 +200,7 @@ MainComponent::MainComponent ()
     label2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (label3 = new Label ("new label",
-                                           "Number of WAV tracks:"));
+                                           TRANS("Number of WAV tracks:")));
     label3->setFont (Font (15.00f, Font::plain));
     label3->setJustificationType (Justification::centredLeft);
     label3->setEditable (false, false, false);
@@ -204,27 +208,27 @@ MainComponent::MainComponent ()
     label3->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (playsoloButton2 = new TextButton (String::empty));
-    playsoloButton2->setButtonText ("Play Solo");
+    playsoloButton2->setButtonText (TRANS("Play Solo"));
     playsoloButton2->addListener (this);
 
     addAndMakeVisible (playmixButton2 = new TextButton (String::empty));
-    playmixButton2->setButtonText ("Play Poly");
+    playmixButton2->setButtonText (TRANS("Play Poly"));
     playmixButton2->addListener (this);
 
     addAndMakeVisible (stopButton2 = new TextButton (String::empty));
-    stopButton2->setButtonText ("Stop");
+    stopButton2->setButtonText (TRANS("Stop"));
     stopButton2->addListener (this);
 
     addAndMakeVisible (loopToggle2 = new ToggleButton (String::empty));
-    loopToggle2->setButtonText ("Loop");
+    loopToggle2->setButtonText (TRANS("Loop"));
     loopToggle2->addListener (this);
 
     addAndMakeVisible (pauseButton2 = new TextButton (String::empty));
-    pauseButton2->setButtonText ("Pause");
+    pauseButton2->setButtonText (TRANS("Pause"));
     pauseButton2->addListener (this);
 
     addAndMakeVisible (resumeButton2 = new TextButton (String::empty));
-    resumeButton2->setButtonText ("Resume");
+    resumeButton2->setButtonText (TRANS("Resume"));
     resumeButton2->addListener (this);
 
     addAndMakeVisible (trigText2 = new TextEditor (String::empty));
@@ -234,30 +238,30 @@ MainComponent::MainComponent ()
     trigText2->setScrollbarsShown (true);
     trigText2->setCaretVisible (true);
     trigText2->setPopupMenuEnabled (true);
-    trigText2->setText ("2");
+    trigText2->setText (TRANS("2"));
 
     addAndMakeVisible (playsoloButton3 = new TextButton (String::empty));
-    playsoloButton3->setButtonText ("Play Solo");
+    playsoloButton3->setButtonText (TRANS("Play Solo"));
     playsoloButton3->addListener (this);
 
     addAndMakeVisible (playmixButton3 = new TextButton (String::empty));
-    playmixButton3->setButtonText ("Play Poly");
+    playmixButton3->setButtonText (TRANS("Play Poly"));
     playmixButton3->addListener (this);
 
     addAndMakeVisible (stopButton3 = new TextButton (String::empty));
-    stopButton3->setButtonText ("Stop");
+    stopButton3->setButtonText (TRANS("Stop"));
     stopButton3->addListener (this);
 
     addAndMakeVisible (loopToggle3 = new ToggleButton (String::empty));
-    loopToggle3->setButtonText ("Loop");
+    loopToggle3->setButtonText (TRANS("Loop"));
     loopToggle3->addListener (this);
 
     addAndMakeVisible (pauseButton3 = new TextButton (String::empty));
-    pauseButton3->setButtonText ("Pause");
+    pauseButton3->setButtonText (TRANS("Pause"));
     pauseButton3->addListener (this);
 
     addAndMakeVisible (resumeButton3 = new TextButton (String::empty));
-    resumeButton3->setButtonText ("Resume");
+    resumeButton3->setButtonText (TRANS("Resume"));
     resumeButton3->addListener (this);
 
     addAndMakeVisible (trigText3 = new TextEditor (String::empty));
@@ -267,30 +271,30 @@ MainComponent::MainComponent ()
     trigText3->setScrollbarsShown (true);
     trigText3->setCaretVisible (true);
     trigText3->setPopupMenuEnabled (true);
-    trigText3->setText ("3");
+    trigText3->setText (TRANS("3"));
 
     addAndMakeVisible (playsoloButton4 = new TextButton (String::empty));
-    playsoloButton4->setButtonText ("Play Solo");
+    playsoloButton4->setButtonText (TRANS("Play Solo"));
     playsoloButton4->addListener (this);
 
     addAndMakeVisible (playmixButton4 = new TextButton (String::empty));
-    playmixButton4->setButtonText ("Play Poly");
+    playmixButton4->setButtonText (TRANS("Play Poly"));
     playmixButton4->addListener (this);
 
     addAndMakeVisible (stopButton4 = new TextButton (String::empty));
-    stopButton4->setButtonText ("Stop");
+    stopButton4->setButtonText (TRANS("Stop"));
     stopButton4->addListener (this);
 
     addAndMakeVisible (loopToggle4 = new ToggleButton (String::empty));
-    loopToggle4->setButtonText ("Loop");
+    loopToggle4->setButtonText (TRANS("Loop"));
     loopToggle4->addListener (this);
 
     addAndMakeVisible (pauseButton4 = new TextButton (String::empty));
-    pauseButton4->setButtonText ("Pause");
+    pauseButton4->setButtonText (TRANS("Pause"));
     pauseButton4->addListener (this);
 
     addAndMakeVisible (resumeButton4 = new TextButton (String::empty));
-    resumeButton4->setButtonText ("Resume");
+    resumeButton4->setButtonText (TRANS("Resume"));
     resumeButton4->addListener (this);
 
     addAndMakeVisible (trigText4 = new TextEditor (String::empty));
@@ -300,14 +304,14 @@ MainComponent::MainComponent ()
     trigText4->setScrollbarsShown (true);
     trigText4->setCaretVisible (true);
     trigText4->setPopupMenuEnabled (true);
-    trigText4->setText ("4");
+    trigText4->setText (TRANS("4"));
 
     addAndMakeVisible (stopAllButton = new TextButton (String::empty));
-    stopAllButton->setButtonText ("Stop All");
+    stopAllButton->setButtonText (TRANS("Stop All"));
     stopAllButton->addListener (this);
 
     addAndMakeVisible (statusButton = new TextButton (String::empty));
-    statusButton->setButtonText ("Update");
+    statusButton->setButtonText (TRANS("Update"));
     statusButton->addListener (this);
 
     addAndMakeVisible (activeVoicesText = new TextEditor (String::empty));
@@ -320,7 +324,7 @@ MainComponent::MainComponent ()
     activeVoicesText->setText (String::empty);
 
     addAndMakeVisible (label4 = new Label ("new label",
-                                           "Stereo voices playing"));
+                                           TRANS("Stereo voices playing")));
     label4->setFont (Font (15.00f, Font::plain));
     label4->setJustificationType (Justification::centredLeft);
     label4->setEditable (false, false, false);
@@ -356,8 +360,39 @@ MainComponent::MainComponent ()
     gainSlider4->addListener (this);
 
     addAndMakeVisible (ampToggle = new ToggleButton (String::empty));
-    ampToggle->setButtonText ("Amp Power");
+    ampToggle->setButtonText (TRANS("Amp Power"));
     ampToggle->addListener (this);
+
+    addAndMakeVisible (pitchSlider = new Slider (String::empty));
+    pitchSlider->setRange (-32767, 32767, 1);
+    pitchSlider->setSliderStyle (Slider::RotaryVerticalDrag);
+    pitchSlider->setTextBoxStyle (Slider::TextBoxRight, false, 50, 20);
+    pitchSlider->setColour (Slider::rotarySliderFillColourId, Colour (0x7f000000));
+    pitchSlider->addListener (this);
+
+    addAndMakeVisible (label5 = new Label ("new label",
+                                           TRANS("Volume")));
+    label5->setFont (Font (15.00f, Font::plain));
+    label5->setJustificationType (Justification::centredLeft);
+    label5->setEditable (false, false, false);
+    label5->setColour (TextEditor::textColourId, Colours::black);
+    label5->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (label6 = new Label ("new label",
+                                           TRANS("Samplerate")));
+    label6->setFont (Font (15.00f, Font::plain));
+    label6->setJustificationType (Justification::centredLeft);
+    label6->setEditable (false, false, false);
+    label6->setColour (TextEditor::textColourId, Colours::black);
+    label6->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (label7 = new Label ("new label",
+                                           TRANS("Offset")));
+    label7->setFont (Font (15.00f, Font::plain));
+    label7->setJustificationType (Justification::centredLeft);
+    label7->setEditable (false, false, false);
+    label7->setColour (TextEditor::textColourId, Colours::black);
+    label7->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
 
     //[UserPreSize]
@@ -438,6 +473,7 @@ MainComponent::~MainComponent()
 	}
     //[/Destructor_pre]
 
+    groupComponent5 = nullptr;
     groupComponent3 = nullptr;
     groupComponent4 = nullptr;
     groupComponent = nullptr;
@@ -495,6 +531,10 @@ MainComponent::~MainComponent()
     gainSlider3 = nullptr;
     gainSlider4 = nullptr;
     ampToggle = nullptr;
+    pitchSlider = nullptr;
+    label5 = nullptr;
+    label6 = nullptr;
+    label7 = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -515,26 +555,27 @@ void MainComponent::paint (Graphics& g)
 
 void MainComponent::resized()
 {
-    groupComponent3->setBounds (24, 208, 752, 272);
-    groupComponent4->setBounds (340, 504, 327, 70);
+    groupComponent5->setBounds (24, 442, 320, 136);
+    groupComponent3->setBounds (24, 197, 752, 232);
+    groupComponent4->setBounds (376, 443, 304, 70);
     groupComponent->setBounds (416, 24, 360, 160);
     groupComponent2->setBounds (24, 24, 360, 160);
-    volSlider->setBounds (12, 510, 135, 60);
-    portBoxlabel3->setBounds (91, 557, 72, 16);
+    volSlider->setBounds (40, 475, 120, 52);
+    portBoxlabel3->setBounds (102, 512, 72, 16);
     portBoxlabel->setBounds (442, 60, 88, 16);
-    quitButton->setBounds (712, 548, 63, 24);
+    quitButton->setBounds (712, 544, 63, 24);
     portBox->setBounds (528, 56, 224, 24);
     statusBar->setBounds (0, getHeight() - 24, proportionOfWidth (1.0000f), 24);
-    helpButton->setBounds (712, 510, 63, 24);
+    helpButton->setBounds (712, 507, 63, 24);
     baudBox->setBounds (647, 96, 104, 24);
     portBoxlabel2->setBounds (569, 101, 81, 16);
-    playsoloButton1->setBounds (208, 240, 72, 24);
-    playmixButton1->setBounds (296, 240, 72, 24);
-    stopButton1->setBounds (560, 240, 72, 24);
-    loopToggle1->setBounds (139, 239, 64, 24);
-    pauseButton1->setBounds (384, 240, 72, 24);
-    resumeButton1->setBounds (472, 240, 72, 24);
-    trigText1->setBounds (68, 240, 55, 24);
+    playsoloButton1->setBounds (208, 229, 72, 24);
+    playmixButton1->setBounds (296, 229, 72, 24);
+    stopButton1->setBounds (560, 229, 72, 24);
+    loopToggle1->setBounds (139, 228, 64, 24);
+    pauseButton1->setBounds (384, 229, 72, 24);
+    resumeButton1->setBounds (472, 229, 72, 24);
+    trigText1->setBounds (68, 229, 55, 24);
     versionText->setBounds (184, 56, 176, 24);
     versionButton->setBounds (48, 136, 63, 24);
     numVoicesText->setBounds (320, 96, 41, 24);
@@ -542,36 +583,40 @@ void MainComponent::resized()
     label->setBounds (60, 56, 128, 24);
     label2->setBounds (150, 97, 175, 24);
     label3->setBounds (163, 136, 163, 24);
-    playsoloButton2->setBounds (208, 289, 72, 24);
-    playmixButton2->setBounds (296, 289, 72, 24);
-    stopButton2->setBounds (560, 289, 72, 24);
-    loopToggle2->setBounds (139, 288, 64, 24);
-    pauseButton2->setBounds (384, 289, 72, 24);
-    resumeButton2->setBounds (472, 289, 72, 24);
-    trigText2->setBounds (68, 289, 55, 24);
-    playsoloButton3->setBounds (208, 338, 72, 24);
-    playmixButton3->setBounds (296, 338, 72, 24);
-    stopButton3->setBounds (560, 338, 72, 24);
-    loopToggle3->setBounds (139, 337, 64, 24);
-    pauseButton3->setBounds (384, 338, 72, 24);
-    resumeButton3->setBounds (472, 338, 72, 24);
-    trigText3->setBounds (68, 338, 55, 24);
-    playsoloButton4->setBounds (208, 386, 72, 24);
-    playmixButton4->setBounds (296, 386, 72, 24);
-    stopButton4->setBounds (560, 386, 72, 24);
-    loopToggle4->setBounds (139, 385, 64, 24);
-    pauseButton4->setBounds (384, 386, 72, 24);
-    resumeButton4->setBounds (472, 386, 72, 24);
-    trigText4->setBounds (68, 386, 55, 24);
-    stopAllButton->setBounds (559, 432, 72, 24);
-    statusButton->setBounds (377, 532, 63, 24);
-    activeVoicesText->setBounds (466, 532, 33, 24);
-    label4->setBounds (507, 532, 144, 24);
-    gainSlider1->setBounds (646, 239, 90, 30);
-    gainSlider2->setBounds (646, 288, 90, 30);
-    gainSlider3->setBounds (646, 335, 90, 30);
-    gainSlider4->setBounds (646, 382, 90, 30);
-    ampToggle->setBounds (208, 528, 112, 24);
+    playsoloButton2->setBounds (208, 278, 72, 24);
+    playmixButton2->setBounds (296, 278, 72, 24);
+    stopButton2->setBounds (560, 278, 72, 24);
+    loopToggle2->setBounds (139, 277, 64, 24);
+    pauseButton2->setBounds (384, 278, 72, 24);
+    resumeButton2->setBounds (472, 278, 72, 24);
+    trigText2->setBounds (68, 278, 55, 24);
+    playsoloButton3->setBounds (208, 327, 72, 24);
+    playmixButton3->setBounds (296, 327, 72, 24);
+    stopButton3->setBounds (560, 327, 72, 24);
+    loopToggle3->setBounds (139, 326, 64, 24);
+    pauseButton3->setBounds (384, 327, 72, 24);
+    resumeButton3->setBounds (472, 327, 72, 24);
+    trigText3->setBounds (68, 327, 55, 24);
+    playsoloButton4->setBounds (208, 375, 72, 24);
+    playmixButton4->setBounds (296, 375, 72, 24);
+    stopButton4->setBounds (560, 375, 72, 24);
+    loopToggle4->setBounds (139, 374, 64, 24);
+    pauseButton4->setBounds (384, 375, 72, 24);
+    resumeButton4->setBounds (472, 375, 72, 24);
+    trigText4->setBounds (68, 375, 55, 24);
+    stopAllButton->setBounds (608, 544, 72, 24);
+    statusButton->setBounds (395, 471, 63, 24);
+    activeVoicesText->setBounds (484, 471, 33, 24);
+    label4->setBounds (525, 471, 144, 24);
+    gainSlider1->setBounds (646, 228, 90, 30);
+    gainSlider2->setBounds (646, 277, 90, 30);
+    gainSlider3->setBounds (646, 324, 90, 30);
+    gainSlider4->setBounds (646, 371, 90, 30);
+    ampToggle->setBounds (168, 539, 112, 24);
+    pitchSlider->setBounds (191, 475, 125, 52);
+    label5->setBounds (96, 459, 64, 24);
+    label6->setBounds (244, 459, 80, 24);
+    label7->setBounds (267, 509, 48, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -625,6 +670,11 @@ void MainComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 		iVal = (int)gainSlider4->getValue();
 		pCom->trackVolume(tVal, iVal);
         //[/UserSliderCode_gainSlider4]
+    }
+    else if (sliderThatWasMoved == pitchSlider)
+    {
+        //[UserSliderCode_pitchSlider] -- add your slider handling code here..
+        //[/UserSliderCode_pitchSlider]
     }
 
     //[UsersliderValueChanged_Post]
@@ -998,11 +1048,14 @@ BEGIN_JUCER_METADATA
                  variableInitialisers="" snapPixels="8" snapActive="1" snapShown="1"
                  overlayOpacity="0.330" fixedSize="1" initialWidth="800" initialHeight="620">
   <BACKGROUND backgroundColour="ff2a4dba"/>
+  <GROUPCOMPONENT name="new group" id="25bc76f1355d29ee" memberName="groupComponent5"
+                  virtualName="" explicitFocusOrder="0" pos="24 442 320 136" textcol="ffffffff"
+                  title="System"/>
   <GROUPCOMPONENT name="new group" id="69229fd352cbc9b2" memberName="groupComponent3"
-                  virtualName="" explicitFocusOrder="0" pos="24 208 752 272" textcol="ffffffff"
+                  virtualName="" explicitFocusOrder="0" pos="24 197 752 232" textcol="ffffffff"
                   title="Track Control"/>
   <GROUPCOMPONENT name="new group" id="2f2f9d0bb275a4cd" memberName="groupComponent4"
-                  virtualName="" explicitFocusOrder="0" pos="340 504 327 70" textcol="ffffffff"
+                  virtualName="" explicitFocusOrder="0" pos="376 443 304 70" textcol="ffffffff"
                   title="Status"/>
   <GROUPCOMPONENT name="new group" id="2cf21ac44d719d93" memberName="groupComponent"
                   virtualName="" explicitFocusOrder="0" pos="416 24 360 160" textcol="ffffffff"
@@ -1011,11 +1064,11 @@ BEGIN_JUCER_METADATA
                   virtualName="" explicitFocusOrder="0" pos="24 24 360 160" textcol="ffffffff"
                   title="WAV Trigger System Info"/>
   <SLIDER name="" id="a4b37bd1b46fdb64" memberName="volSlider" virtualName=""
-          explicitFocusOrder="0" pos="12 510 135 60" rotarysliderfill="7f000000"
+          explicitFocusOrder="0" pos="40 475 120 52" rotarysliderfill="7f000000"
           min="-70" max="10" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="50" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="" id="b3b1c85b4500968f" memberName="portBoxlabel3" virtualName=""
-         explicitFocusOrder="0" pos="91 557 72 16" textCol="ff000000"
+         explicitFocusOrder="0" pos="102 512 72 16" textCol="ff000000"
          edTextCol="ff000000" edBkgCol="0" labelText="Gain (dB)" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="16" bold="0" italic="0" justification="36"/>
@@ -1025,7 +1078,7 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="16" bold="0" italic="0" justification="36"/>
   <TEXTBUTTON name="" id="bcf4f7b0888effe5" memberName="quitButton" virtualName=""
-              explicitFocusOrder="0" pos="712 548 63 24" buttonText="Quit"
+              explicitFocusOrder="0" pos="712 544 63 24" buttonText="Quit"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <COMBOBOX name="" id="a9377a9d1326182e" memberName="portBox" virtualName=""
             explicitFocusOrder="0" pos="528 56 224 24" editable="0" layout="33"
@@ -1037,7 +1090,7 @@ BEGIN_JUCER_METADATA
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="" id="d687ab0ae7e4a720" memberName="helpButton" virtualName=""
-              explicitFocusOrder="0" pos="712 510 63 24" buttonText="Help"
+              explicitFocusOrder="0" pos="712 507 63 24" buttonText="Help"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <COMBOBOX name="" id="2c59ca67fae45d22" memberName="baudBox" virtualName=""
             explicitFocusOrder="0" pos="647 96 104 24" editable="0" layout="33"
@@ -1048,25 +1101,25 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="16" bold="0" italic="0" justification="36"/>
   <TEXTBUTTON name="" id="dbbab70ff7e44452" memberName="playsoloButton1" virtualName=""
-              explicitFocusOrder="0" pos="208 240 72 24" buttonText="Play Solo"
+              explicitFocusOrder="0" pos="208 229 72 24" buttonText="Play Solo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="51f8f1f4d874a866" memberName="playmixButton1" virtualName=""
-              explicitFocusOrder="0" pos="296 240 72 24" buttonText="Play Poly"
+              explicitFocusOrder="0" pos="296 229 72 24" buttonText="Play Poly"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="c902ffad93176b2c" memberName="stopButton1" virtualName=""
-              explicitFocusOrder="0" pos="560 240 72 24" buttonText="Stop"
+              explicitFocusOrder="0" pos="560 229 72 24" buttonText="Stop"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="" id="403473bc1f1cbd0b" memberName="loopToggle1" virtualName=""
-                explicitFocusOrder="0" pos="139 239 64 24" buttonText="Loop"
+                explicitFocusOrder="0" pos="139 228 64 24" buttonText="Loop"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TEXTBUTTON name="" id="4300c5f8bc94f310" memberName="pauseButton1" virtualName=""
-              explicitFocusOrder="0" pos="384 240 72 24" buttonText="Pause"
+              explicitFocusOrder="0" pos="384 229 72 24" buttonText="Pause"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="9865d9baf642eb5f" memberName="resumeButton1" virtualName=""
-              explicitFocusOrder="0" pos="472 240 72 24" buttonText="Resume"
+              explicitFocusOrder="0" pos="472 229 72 24" buttonText="Resume"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTEDITOR name="" id="349bf31d6a377790" memberName="trigText1" virtualName=""
-              explicitFocusOrder="0" pos="68 240 55 24" initialText="1" multiline="0"
+              explicitFocusOrder="0" pos="68 229 55 24" initialText="1" multiline="0"
               retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
   <TEXTEDITOR name="" id="d897b478ba180688" memberName="versionText" virtualName=""
               explicitFocusOrder="0" pos="184 56 176 24" initialText="" multiline="0"
@@ -1096,101 +1149,120 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="" id="7f0e6681b9cd0f73" memberName="playsoloButton2" virtualName=""
-              explicitFocusOrder="0" pos="208 289 72 24" buttonText="Play Solo"
+              explicitFocusOrder="0" pos="208 278 72 24" buttonText="Play Solo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="5b12b9288609c1c3" memberName="playmixButton2" virtualName=""
-              explicitFocusOrder="0" pos="296 289 72 24" buttonText="Play Poly"
+              explicitFocusOrder="0" pos="296 278 72 24" buttonText="Play Poly"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="db164cb87a73ee5" memberName="stopButton2" virtualName=""
-              explicitFocusOrder="0" pos="560 289 72 24" buttonText="Stop"
+              explicitFocusOrder="0" pos="560 278 72 24" buttonText="Stop"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="" id="6bd56188c0903ee2" memberName="loopToggle2" virtualName=""
-                explicitFocusOrder="0" pos="139 288 64 24" buttonText="Loop"
+                explicitFocusOrder="0" pos="139 277 64 24" buttonText="Loop"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TEXTBUTTON name="" id="1642d5e074a6111e" memberName="pauseButton2" virtualName=""
-              explicitFocusOrder="0" pos="384 289 72 24" buttonText="Pause"
+              explicitFocusOrder="0" pos="384 278 72 24" buttonText="Pause"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="3e4d4c740ddd1bc3" memberName="resumeButton2" virtualName=""
-              explicitFocusOrder="0" pos="472 289 72 24" buttonText="Resume"
+              explicitFocusOrder="0" pos="472 278 72 24" buttonText="Resume"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTEDITOR name="" id="2b590d01f2235d90" memberName="trigText2" virtualName=""
-              explicitFocusOrder="0" pos="68 289 55 24" initialText="2" multiline="0"
+              explicitFocusOrder="0" pos="68 278 55 24" initialText="2" multiline="0"
               retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
   <TEXTBUTTON name="" id="d73e3cf999c54579" memberName="playsoloButton3" virtualName=""
-              explicitFocusOrder="0" pos="208 338 72 24" buttonText="Play Solo"
+              explicitFocusOrder="0" pos="208 327 72 24" buttonText="Play Solo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="3ee79d9e92738b5f" memberName="playmixButton3" virtualName=""
-              explicitFocusOrder="0" pos="296 338 72 24" buttonText="Play Poly"
+              explicitFocusOrder="0" pos="296 327 72 24" buttonText="Play Poly"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="bdd21d937427de45" memberName="stopButton3" virtualName=""
-              explicitFocusOrder="0" pos="560 338 72 24" buttonText="Stop"
+              explicitFocusOrder="0" pos="560 327 72 24" buttonText="Stop"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="" id="31a413cdebdb1e8b" memberName="loopToggle3" virtualName=""
-                explicitFocusOrder="0" pos="139 337 64 24" buttonText="Loop"
+                explicitFocusOrder="0" pos="139 326 64 24" buttonText="Loop"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TEXTBUTTON name="" id="f4dbf44b658c9e30" memberName="pauseButton3" virtualName=""
-              explicitFocusOrder="0" pos="384 338 72 24" buttonText="Pause"
+              explicitFocusOrder="0" pos="384 327 72 24" buttonText="Pause"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="249ead5e9b5d4a0" memberName="resumeButton3" virtualName=""
-              explicitFocusOrder="0" pos="472 338 72 24" buttonText="Resume"
+              explicitFocusOrder="0" pos="472 327 72 24" buttonText="Resume"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTEDITOR name="" id="7da7f44767016f2f" memberName="trigText3" virtualName=""
-              explicitFocusOrder="0" pos="68 338 55 24" initialText="3" multiline="0"
+              explicitFocusOrder="0" pos="68 327 55 24" initialText="3" multiline="0"
               retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
   <TEXTBUTTON name="" id="a90629870d2b8c10" memberName="playsoloButton4" virtualName=""
-              explicitFocusOrder="0" pos="208 386 72 24" buttonText="Play Solo"
+              explicitFocusOrder="0" pos="208 375 72 24" buttonText="Play Solo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="2ac5ec9cfa4d4951" memberName="playmixButton4" virtualName=""
-              explicitFocusOrder="0" pos="296 386 72 24" buttonText="Play Poly"
+              explicitFocusOrder="0" pos="296 375 72 24" buttonText="Play Poly"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="ed70635b82008bdf" memberName="stopButton4" virtualName=""
-              explicitFocusOrder="0" pos="560 386 72 24" buttonText="Stop"
+              explicitFocusOrder="0" pos="560 375 72 24" buttonText="Stop"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="" id="62772798a04fa3de" memberName="loopToggle4" virtualName=""
-                explicitFocusOrder="0" pos="139 385 64 24" buttonText="Loop"
+                explicitFocusOrder="0" pos="139 374 64 24" buttonText="Loop"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TEXTBUTTON name="" id="697fd215367a3f8b" memberName="pauseButton4" virtualName=""
-              explicitFocusOrder="0" pos="384 386 72 24" buttonText="Pause"
+              explicitFocusOrder="0" pos="384 375 72 24" buttonText="Pause"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="d1e44c4da5163d80" memberName="resumeButton4" virtualName=""
-              explicitFocusOrder="0" pos="472 386 72 24" buttonText="Resume"
+              explicitFocusOrder="0" pos="472 375 72 24" buttonText="Resume"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTEDITOR name="" id="fa324c00c2f845ca" memberName="trigText4" virtualName=""
-              explicitFocusOrder="0" pos="68 386 55 24" initialText="4" multiline="0"
+              explicitFocusOrder="0" pos="68 375 55 24" initialText="4" multiline="0"
               retKeyStartsLine="0" readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
   <TEXTBUTTON name="" id="be0f5cd3d7919846" memberName="stopAllButton" virtualName=""
-              explicitFocusOrder="0" pos="559 432 72 24" buttonText="Stop All"
+              explicitFocusOrder="0" pos="608 544 72 24" buttonText="Stop All"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="" id="a0525f7ba969cc61" memberName="statusButton" virtualName=""
-              explicitFocusOrder="0" pos="377 532 63 24" buttonText="Update"
+              explicitFocusOrder="0" pos="395 471 63 24" buttonText="Update"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTEDITOR name="" id="7955e0b540fa99a9" memberName="activeVoicesText" virtualName=""
-              explicitFocusOrder="0" pos="466 532 33 24" initialText="" multiline="0"
+              explicitFocusOrder="0" pos="484 471 33 24" initialText="" multiline="0"
               retKeyStartsLine="0" readonly="1" scrollbars="0" caret="0" popupmenu="1"/>
   <LABEL name="new label" id="562907ed2eb03762" memberName="label4" virtualName=""
-         explicitFocusOrder="0" pos="507 532 144 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="525 471 144 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Stereo voices playing" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <SLIDER name="" id="6f666b645a6cc4e1" memberName="gainSlider1" virtualName=""
-          explicitFocusOrder="0" pos="646 239 90 30" rotarysliderfill="7f000000"
+          explicitFocusOrder="0" pos="646 228 90 30" rotarysliderfill="7f000000"
           min="-70" max="10" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="40" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="" id="1d1be3038a09674b" memberName="gainSlider2" virtualName=""
-          explicitFocusOrder="0" pos="646 288 90 30" rotarysliderfill="7f000000"
+          explicitFocusOrder="0" pos="646 277 90 30" rotarysliderfill="7f000000"
           min="-70" max="10" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="40" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="" id="73fd6546db69fcf2" memberName="gainSlider3" virtualName=""
-          explicitFocusOrder="0" pos="646 335 90 30" rotarysliderfill="7f000000"
+          explicitFocusOrder="0" pos="646 324 90 30" rotarysliderfill="7f000000"
           min="-70" max="10" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="40" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="" id="10e7e96188454810" memberName="gainSlider4" virtualName=""
-          explicitFocusOrder="0" pos="646 382 90 30" rotarysliderfill="7f000000"
+          explicitFocusOrder="0" pos="646 371 90 30" rotarysliderfill="7f000000"
           min="-70" max="10" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="40" textBoxHeight="20" skewFactor="1"/>
   <TOGGLEBUTTON name="" id="2b535ea7e7cfbb6b" memberName="ampToggle" virtualName=""
-                explicitFocusOrder="0" pos="208 528 112 24" buttonText="Amp Power"
+                explicitFocusOrder="0" pos="168 539 112 24" buttonText="Amp Power"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <SLIDER name="" id="c35f07622cf5b018" memberName="pitchSlider" virtualName=""
+          explicitFocusOrder="0" pos="191 475 125 52" rotarysliderfill="7f000000"
+          min="-32767" max="32767" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxRight"
+          textBoxEditable="1" textBoxWidth="50" textBoxHeight="20" skewFactor="1"/>
+  <LABEL name="new label" id="9644d49c95c3799f" memberName="label5" virtualName=""
+         explicitFocusOrder="0" pos="96 459 64 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Volume" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="33"/>
+  <LABEL name="new label" id="c44c5a569358da0d" memberName="label6" virtualName=""
+         explicitFocusOrder="0" pos="244 459 80 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Samplerate" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="33"/>
+  <LABEL name="new label" id="596ed3aa07ade561" memberName="label7" virtualName=""
+         explicitFocusOrder="0" pos="267 509 48 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="Offset" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

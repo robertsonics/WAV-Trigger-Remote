@@ -69,6 +69,7 @@ private:
     //[/UserVariables]
 
     //==============================================================================
+    ScopedPointer<GroupComponent> groupComponent5;
     ScopedPointer<GroupComponent> groupComponent3;
     ScopedPointer<GroupComponent> groupComponent4;
     ScopedPointer<GroupComponent> groupComponent;
@@ -126,6 +127,10 @@ private:
     ScopedPointer<Slider> gainSlider3;
     ScopedPointer<Slider> gainSlider4;
     ScopedPointer<ToggleButton> ampToggle;
+    ScopedPointer<Slider> pitchSlider;
+    ScopedPointer<Label> label5;
+    ScopedPointer<Label> label6;
+    ScopedPointer<Label> label7;
 
 
     //==============================================================================

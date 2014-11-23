@@ -15,7 +15,7 @@
 #include "../../../../juce/modules/juce_core/time/juce_Time.h"
 #include "Serial.h"
 
-#define MAX_MESSAGE_LENGTH	32
+#define MAX_MESSAGE_LENGTH	36
 
 #define COMM_STOPPED		0
 #define COMM_STARTED		1
@@ -40,6 +40,7 @@ public:
 	bool controlTrack(int mode, int trackNum);
 	bool trackVolume(int trackNum, int iVol);
 	bool volume(int iVol);
+	bool samplerateOffset(int iOff);
 	bool ampPower(bool ampState);
 	bool stopAll(void);
 	int getState()				{ return m_State; }

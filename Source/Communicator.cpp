@@ -108,11 +108,11 @@ String portID = "\\\\.\\";
 		if (portID.contains(")"))
 			portID = portID.substring(0, 8);
 	}
-	pSP = new SerialPort(portID, SerialPortConfig(57600, 8, SerialPortConfig::SERIALPORT_PARITY_EVEN, SerialPortConfig::STOPBITS_1, SerialPortConfig::FLOWCONTROL_NONE));
+	pSP = new SerialPort(portID, SerialPortConfig(57600, 8, SerialPortConfig::SERIALPORT_PARITY_NONE, SerialPortConfig::STOPBITS_1, SerialPortConfig::FLOWCONTROL_NONE));
 
 #else
 
-	pSP = new SerialPort(portName, SerialPortConfig(57600, 8, SerialPortConfig::SERIALPORT_PARITY_EVEN, SerialPortConfig::STOPBITS_1, SerialPortConfig::FLOWCONTROL_NONE));
+	pSP = new SerialPort(portName, SerialPortConfig(57600, 8, SerialPortConfig::SERIALPORT_PARITY_NONE, SerialPortConfig::STOPBITS_1, SerialPortConfig::FLOWCONTROL_NONE));
 
 #endif
 
@@ -223,7 +223,7 @@ unsigned char xbuf[16];
 
 
 // **************************************************************************
-// stopAll
+// Volume
 bool Communicator::volume(int iVol) {
 
 unsigned char xbuf[16];
@@ -244,6 +244,28 @@ unsigned short uVal;
 	return true;
 }
 
+
+// **************************************************************************
+// Samplerate Offset
+bool Communicator::samplerateOffset(int iOff) {
+
+unsigned char xbuf[16];
+unsigned short uVal;
+
+	if (pSP == nullptr)
+		return false;
+
+	xbuf[0] = 0xF0;
+	xbuf[1] = 0xaa;
+	xbuf[2] = 0x07;
+	xbuf[3] = SAMPLERATE_OFFSET;
+	uVal = (unsigned short)iOff;
+	xbuf[4] = (unsigned char)iOff;
+	xbuf[5] = (unsigned short)(uVal >> 8);
+	xbuf[6] = 0x55;
+	pOutStream->write(xbuf, 7);
+	return true;
+}
 
 // **************************************************************************
 // controlTrack
