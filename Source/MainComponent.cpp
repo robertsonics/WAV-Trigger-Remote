@@ -674,6 +674,8 @@ void MainComponent::sliderValueChanged (Slider* sliderThatWasMoved)
     else if (sliderThatWasMoved == pitchSlider)
     {
         //[UserSliderCode_pitchSlider] -- add your slider handling code here..
+ 		iVal = (int)pitchSlider->getValue();
+		pCom->samplerateOffset(iVal);
         //[/UserSliderCode_pitchSlider]
     }
 
