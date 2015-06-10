@@ -276,7 +276,7 @@ unsigned char xbuf[16];
 	if (pSP == nullptr)
 		return false;
 
-	if (trackNum > 999)
+	if (trackNum > 2048)
 		return false;
 
 	xbuf[0] = 0xF0;
@@ -302,7 +302,7 @@ unsigned short uVal;
 	if (pSP == nullptr)
 		return false;
 
-	if (trackNum > 999)
+	if (trackNum > 2048)
 		return false;
 
 	xbuf[0] = 0xF0;

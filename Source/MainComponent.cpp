@@ -414,10 +414,10 @@ MainComponent::MainComponent ()
 	// For now, disable baudrate selection
 	baudBox->setEnabled(false);
 
-	trigText1->setInputRestrictions(3, "0123456789");
-	trigText2->setInputRestrictions(3, "0123456789");
-	trigText3->setInputRestrictions(3, "0123456789");
-	trigText4->setInputRestrictions(3, "0123456789");
+	trigText1->setInputRestrictions(4, "0123456789");
+	trigText2->setInputRestrictions(4, "0123456789");
+	trigText3->setInputRestrictions(4, "0123456789");
+	trigText4->setInputRestrictions(4, "0123456789");
 
 	pCom = new Communicator();
 	pCom->addChangeListener(this);
@@ -555,6 +555,9 @@ void MainComponent::paint (Graphics& g)
 
 void MainComponent::resized()
 {
+    //[UserPreResize] Add your own custom resize code here..
+    //[/UserPreResize]
+
     groupComponent5->setBounds (24, 442, 320, 136);
     groupComponent3->setBounds (24, 197, 752, 232);
     groupComponent4->setBounds (376, 443, 304, 70);
